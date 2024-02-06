@@ -81,8 +81,45 @@ char **map_to_array(int fd, int last)
 	return(map_array);
 }
 
+void rendering(void *mlx, void *window, int width, int height, char **map_array)
+{
+	int k, z;
+	void *image;
+	int i = 0;
+	int j = 0;
+	int f = 0;
+	int l = 0;
+	while(i < height)
+	{
+		j = 0;
+		l = 0;
+		while(j < width)
+		{
+			image = mlx_xpm_file_to_image(mlx, "./assets/square.xpm", &k, &z);
+			mlx_put_image_to_window(mlx, window, image, j, i);
+			if (map_array[f][l] == '1')
+				image = mlx_xpm_file_to_image(mlx, "./assets/1.xpm", &k, &z);
+			else if (map_array[f][l] == 'C')
+				image = mlx_xpm_file_to_image(mlx, "./assets/C.xpm", &k, &z);
+			else if (map_array[f][l] == 'P')
+				image = mlx_xpm_file_to_image(mlx, "./assets/P.xpm", &k, &z);
+			else if (map_array[f][l] == 'E')
+				image = mlx_xpm_file_to_image(mlx, "./assets/E.xpm", &k, &z);
+			else
+				image = mlx_xpm_file_to_image(mlx, "./assets/square.xpm", &k, &z);
+			mlx_put_image_to_window(mlx, window, image, j, i);
+			l++;
+			j += 48;
+		}
+		f++;
+		i += 48;
+	}
+}
+
 int main(int argc, char **argv)
 {
+	int height;
+	size_t width;
 	int last;
 	if (argc != 2)
 		return(perror("Incorrect number of arguments!"), 1);
@@ -94,26 +131,10 @@ int main(int argc, char **argv)
 		return(perror("Invalid map"), 1);
 	fd = open(map_path, O_RDONLY);
 	char **map_array = map_to_array(fd, last);
-	int i = 0;
-	while(map_array[i])
-	{
-		printf("%s", map_array[i]);
-		i++;
-	}
-	// int k, z;
-	// void *mlx = mlx_init();
-	// void *window = mlx_new_window(mlx, 480, 480, "so_long");
-	// void *image = mlx_xpm_file_to_image(mlx, "./assets/dragon.xpm", &k, &z);
-	// int i = 0, j = 0;
-	// while(i < 480)
-	// {
-	// 	j = 0;
-	// 	while(j < 480)
-	// 	{
-	// 		mlx_put_image_to_window(mlx, window, image, j, i);
-	// 		j += 48;
-	// 	}
-	// 	i += 48;
-	// }
-	// mlx_loop(mlx);
+	height = last;
+	width = ft_strlen(map_array[0]) - 1;
+	void *mlx = mlx_init();
+	void *window = mlx_new_window(mlx, (width * 48), (height * 48), "so_long");
+	rendering(mlx, window, (width * 48), (height * 48), map_array);
+	mlx_loop(mlx);
 }
