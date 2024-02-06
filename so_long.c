@@ -21,14 +21,14 @@ int check_map(int fd, char *map_path, int *last)
 	int e = 0;
 	int c = 0;
 	int p = 0;
-	int i = 0;
+	size_t i = 0;
 	*last = last_line(fd);
 	int first = 2;
 	fd = open(map_path, O_RDONLY);
 	char *s = get_next_line(fd);
 	if (!s)
 		return(close(fd), 0);
-	int len = ft_strlen(s);
+	size_t len = ft_strlen(s);
 	while(i < len - 2)
 	{
 		if (s[i] != '1')
@@ -38,9 +38,14 @@ int check_map(int fd, char *map_path, int *last)
 	s = get_next_line(fd);
 	while(s)
 	{
+		if (first != *last)
+			if (len != ft_strlen(s))
+				return(close(fd), 7);
 		i = 0;
 		if (first == *last)
 		{
+			if (len - 1 != ft_strlen(s))
+				return(close(fd), 8);
 			while(i < len - 1)
 			{
 				if (s[i] != '1')
@@ -55,10 +60,12 @@ int check_map(int fd, char *map_path, int *last)
 		{
 			if (s[i] == 'C')
 				c += 1;
-			if (s[i] == 'E')
+			else if (s[i] == 'E')
 				e += 1;
-			if (s[i] == 'P')
+			else if (s[i] == 'P')
 				p += 1;
+			else if (s[i] != '0' && s[i] != '1')
+				return (close(fd), 6);
 			i++;
 		}
 		s = get_next_line(fd);
@@ -127,7 +134,7 @@ int main(int argc, char **argv)
 	int fd = open(map_path, O_RDONLY);
 	if (fd < 0)
 		return(perror("Map file error opening!"), 1);
-	if (!check_map(fd, map_path, &last))
+	if (check_map(fd, map_path, &last) != 5)
 		return(perror("Invalid map"), 1);
 	fd = open(map_path, O_RDONLY);
 	char **map_array = map_to_array(fd, last);
