@@ -141,24 +141,32 @@ int key_pressed_handler(int key, mlx_data *data)
 {
 	if (key == 126)
 	{
+		if (data->map_array[data->yp - 1][data->xp] == '1')
+			return (1);
 		mlx_put_image_to_window(data->mlx, data->window, data->player_img, (data->xp * 48), (data->yp * 48 - 48));
 		mlx_put_image_to_window(data->mlx, data->window, data->back_img, (data->xp * 48), (data->yp * 48));
 		data->yp -= 1;
 	}
 	else if (key == 125)
 	{
+		if (data->map_array[data->yp + 1][data->xp] == '1')
+			return (1);
 		mlx_put_image_to_window(data->mlx, data->window, data->player_img, (data->xp * 48), (data->yp * 48 + 48));
 		mlx_put_image_to_window(data->mlx, data->window, data->back_img, (data->xp * 48), (data->yp * 48));
 		data->yp += 1;
 	}
 	else if (key == 124)
 	{
+		if (data->map_array[data->yp][data->xp + 1] == '1')
+			return (1);
 		mlx_put_image_to_window(data->mlx, data->window, data->player_img, (data->xp * 48 + 48), (data->yp * 48));
 		mlx_put_image_to_window(data->mlx, data->window, data->back_img, (data->xp * 48), (data->yp * 48));
 		data->xp += 1;
 	}
 	else if (key == 123)
 	{
+		if (data->map_array[data->yp][data->xp - 1] == '1')
+			return (1);
 		mlx_put_image_to_window(data->mlx, data->window, data->player_img, (data->xp * 48 - 48), (data->yp * 48));
 		mlx_put_image_to_window(data->mlx, data->window, data->back_img, (data->xp * 48), (data->yp * 48));
 		data->xp -= 1;
