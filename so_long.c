@@ -3,6 +3,12 @@
 #include <fcntl.h>
 #include "./get_next_line/get_next_line.h"
 
+typedef struct mlx_data
+{
+	void *mlx;
+	void *window;
+}	mlx_data;
+
 int last_line(int fd)
 {
 	int i = 0;
@@ -88,7 +94,7 @@ char **map_to_array(int fd, int last)
 	return(map_array);
 }
 
-void rendering(void *mlx, void *window, int width, int height, char **map_array)
+int rendering(void *mlx, void *window, int width, int height, char **map_array)
 {
 	int k, z;
 	void *image;
@@ -103,6 +109,8 @@ void rendering(void *mlx, void *window, int width, int height, char **map_array)
 		while(j < width)
 		{
 			image = mlx_xpm_file_to_image(mlx, "./assets/square.xpm", &k, &z);
+			if (!image)
+				return (0);
 			mlx_put_image_to_window(mlx, window, image, j, i);
 			if (map_array[f][l] == '1')
 				image = mlx_xpm_file_to_image(mlx, "./assets/1.xpm", &k, &z);
@@ -114,6 +122,8 @@ void rendering(void *mlx, void *window, int width, int height, char **map_array)
 				image = mlx_xpm_file_to_image(mlx, "./assets/E.xpm", &k, &z);
 			else
 				image = mlx_xpm_file_to_image(mlx, "./assets/square.xpm", &k, &z);
+			if (!image)
+				return (0);
 			mlx_put_image_to_window(mlx, window, image, j, i);
 			l++;
 			j += 48;
@@ -121,10 +131,18 @@ void rendering(void *mlx, void *window, int width, int height, char **map_array)
 		f++;
 		i += 48;
 	}
+	return (1);
+}
+
+int key_pressed_handler(int key, void *p)
+{
+	printf("%d\n", key);
+	return (0);
 }
 
 int main(int argc, char **argv)
 {
+	mlx_data data;
 	int height;
 	size_t width;
 	int last;
@@ -140,8 +158,11 @@ int main(int argc, char **argv)
 	char **map_array = map_to_array(fd, last);
 	height = last;
 	width = ft_strlen(map_array[0]) - 1;
-	void *mlx = mlx_init();
-	void *window = mlx_new_window(mlx, (width * 48), (height * 48), "so_long");
-	rendering(mlx, window, (width * 48), (height * 48), map_array);
-	mlx_loop(mlx);
+	data.mlx = mlx_init();
+	data.window = mlx_new_window(data.mlx, (width * 48), (height * 48), "so_long");
+	if (!(rendering(data.mlx, data.window, (width * 48), (height * 48), map_array)))
+		return(perror("Error while rendering!"), 1);
+	printf("here\n");
+	mlx_hook(data.window, 2, 0, &key_pressed_handler, &data);
+	mlx_loop(data.mlx);
 }
