@@ -13,6 +13,8 @@ typedef struct mlx_data
 	void *col_img;
 	void *back_img;
 	void *exit_img;
+	int xp;
+	int yp;
 }	mlx_data;
 
 int last_line(int fd)
@@ -100,7 +102,7 @@ char **map_to_array(int fd, int last)
 	return(map_array);
 }
 
-void rendering(mlx_data data, int width, int height)
+void rendering(mlx_data *data, int width, int height)
 {
 	int i = 0;
 	int j = 0;
@@ -112,17 +114,21 @@ void rendering(mlx_data data, int width, int height)
 		l = 0;
 		while(j < width)
 		{
-			mlx_put_image_to_window(data.mlx, data.window, data.back_img, j, i);
-			if (data.map_array[f][l] == '1')
-				mlx_put_image_to_window(data.mlx, data.window, data.wall_img, j, i);
-			else if (data.map_array[f][l] == 'C')
-				mlx_put_image_to_window(data.mlx, data.window, data.col_img, j, i);
-			else if (data.map_array[f][l] == 'P')
-				mlx_put_image_to_window(data.mlx, data.window, data.player_img, j, i);
-			else if (data.map_array[f][l] == 'E')
-				mlx_put_image_to_window(data.mlx, data.window, data.exit_img, j, i);
+			mlx_put_image_to_window(data->mlx, data->window, data->back_img, j, i);
+			if (data->map_array[f][l] == '1')
+				mlx_put_image_to_window(data->mlx, data->window, data->wall_img, j, i);
+			else if (data->map_array[f][l] == 'C')
+				mlx_put_image_to_window(data->mlx, data->window, data->col_img, j, i);
+			else if (data->map_array[f][l] == 'P')
+			{
+				mlx_put_image_to_window(data->mlx, data->window, data->player_img, j, i);
+				data->xp = l;
+				data->yp = f;
+			}
+			else if (data->map_array[f][l] == 'E')
+				mlx_put_image_to_window(data->mlx, data->window, data->exit_img, j, i);
 			else
-				mlx_put_image_to_window(data.mlx, data.window, data.back_img, j, i);
+				mlx_put_image_to_window(data->mlx, data->window, data->back_img, j, i);
 			l++;
 			j += 48;
 		}
@@ -133,36 +139,26 @@ void rendering(mlx_data data, int width, int height)
 
 int key_pressed_handler(int key, mlx_data *data)
 {
-	int xp = 0;
-	int yp = 0;
-	while(data->map_array[yp])
-	{
-		xp = 0;
-		while(data->map_array[yp][xp] && data->map_array[yp][xp] != 'P')
-			xp++;
-		if (data->map_array[yp][xp] == 'P')
-			break;
-		yp++;
-	}
+	printf("%d-%d\n", data->xp, data->yp);
 	if (key == 126)
 	{
-		mlx_put_image_to_window(data->mlx, data->window, data->player_img, (xp * 48), (yp * 48 - 48));
-		mlx_put_image_to_window(data->mlx, data->window, data->back_img, (xp * 48), (yp * 48));
+		mlx_put_image_to_window(data->mlx, data->window, data->player_img, (data->xp * 48), (data->yp * 48 - 48));
+		mlx_put_image_to_window(data->mlx, data->window, data->back_img, (data->xp * 48), (data->yp * 48));
 	}
 	else if (key == 125)
 	{
-		mlx_put_image_to_window(data->mlx, data->window, data->player_img, (xp * 48), (yp * 48 + 48));
-		mlx_put_image_to_window(data->mlx, data->window, data->back_img, (xp * 48), (yp * 48));
+		mlx_put_image_to_window(data->mlx, data->window, data->player_img, (data->xp * 48), (data->yp * 48 + 48));
+		mlx_put_image_to_window(data->mlx, data->window, data->back_img, (data->xp * 48), (data->yp * 48));
 	}
 	else if (key == 124)
 	{
-		mlx_put_image_to_window(data->mlx, data->window, data->player_img, (xp * 48 + 48), (yp * 48));
-		mlx_put_image_to_window(data->mlx, data->window, data->back_img, (xp * 48), (yp * 48));
+		mlx_put_image_to_window(data->mlx, data->window, data->player_img, (data->xp * 48 + 48), (data->yp * 48));
+		mlx_put_image_to_window(data->mlx, data->window, data->back_img, (data->xp * 48), (data->yp * 48));
 	}
 	else if (key == 123)
 	{
-		mlx_put_image_to_window(data->mlx, data->window, data->player_img, (xp * 48 - 48), (yp * 48));
-		mlx_put_image_to_window(data->mlx, data->window, data->back_img, (xp * 48), (yp * 48));
+		mlx_put_image_to_window(data->mlx, data->window, data->player_img, (data->xp * 48 - 48), (data->yp * 48));
+		mlx_put_image_to_window(data->mlx, data->window, data->back_img, (data->xp * 48), (data->yp * 48));
 	}
 	return (0);
 }
@@ -203,7 +199,7 @@ int main(int argc, char **argv)
 	data.window = mlx_new_window(data.mlx, (width * 48), (height * 48), "so_long");
 	if (!open_and_validate_images(&data))
 		return(perror("Asset error!"), 1);
-	rendering(data, (width * 48), (height * 48));
+	rendering(&data, (width * 48), (height * 48));
 	mlx_hook(data.window, 2, 0, &key_pressed_handler, &data);
 	mlx_loop(data.mlx);
 }
