@@ -139,7 +139,7 @@ void rendering(mlx_data *data, int width, int height)
 
 int key_pressed_handler(int key, mlx_data *data)
 {
-	printf("%d\n", data->collectibles);
+	int c = 0;
 	if (key == 126)
 	{
 		if (data->map_array[data->yp - 1][data->xp] == '1')
@@ -172,11 +172,27 @@ int key_pressed_handler(int key, mlx_data *data)
 		mlx_put_image_to_window(data->mlx, data->window, data->back_img, (data->xp * 48), (data->yp * 48));
 		data->xp -= 1;
 	}
+	else if (key == 53)
+	{
+		mlx_destroy_window(data->mlx, data->window);
+		free(data->mlx);
+	}
 	if (data->map_array[data->yp][data->xp] == 'C')
 	{
+		c += 1;
 		mlx_put_image_to_window(data->mlx, data->window, data->back_img, (data->xp * 48), (data->yp * 48));
 		mlx_put_image_to_window(data->mlx, data->window, data->player_img, (data->xp * 48), (data->yp * 48));
 		return(1);
+	}
+	else if (data->map_array[data->yp][data->xp] == 'E')
+	{
+		if (c == data->collectibles)
+		{
+			mlx_destroy_window(data->mlx, data->window);
+			free(data->mlx);
+		}
+		else
+			return (1);
 	}
 	return (0);
 }
@@ -214,10 +230,15 @@ int main(int argc, char **argv)
 	height = last;
 	width = ft_strlen(data.map_array[0]) - 1;
 	data.mlx = mlx_init();
+	if (!data.mlx)
+		return(perror("Mlx pointer error!"), 1);
 	data.window = mlx_new_window(data.mlx, (width * 48), (height * 48), "so_long");
+	if (!data.window)
+		return(free(data.window), perror("Window error"), 1);
 	if (!open_and_validate_images(&data))
 		return(perror("Asset error!"), 1);
 	rendering(&data, (width * 48), (height * 48));
 	mlx_hook(data.window, 2, 0, &key_pressed_handler, &data);
 	mlx_loop(data.mlx);
+	free(data.mlx);
 }
