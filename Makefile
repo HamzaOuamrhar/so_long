@@ -1,5 +1,5 @@
 CC = cc
-# CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 FFLAGS = -lmlx -framework OpenGL -framework AppKit
 NAME = so_long
 LIBFT = ./Libft/libft.a

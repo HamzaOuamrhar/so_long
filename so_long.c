@@ -221,6 +221,13 @@ int key_pressed_handler(int key, mlx_data *data)
 	return (0);
 }
 
+int close_window_handler(mlx_data *data)
+{
+	mlx_destroy_window(data->mlx, data->window);
+	free(data->mlx);
+	exit(0);
+}
+
 int open_and_validate_images(mlx_data *data)
 {
 	int k;
@@ -263,6 +270,7 @@ int main(int argc, char **argv)
 		return(perror("Asset error!"), 1);
 	rendering(&data, (width * 48), (height * 48));
 	mlx_hook(data.window, 2, 0, &key_pressed_handler, &data);
+	mlx_hook(data.window, 17, 0, &close_window_handler, &data);
 	mlx_loop(data.mlx);
 	free(data.mlx);
 }
