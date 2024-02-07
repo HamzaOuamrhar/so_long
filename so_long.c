@@ -15,6 +15,7 @@ typedef struct mlx_data
 	void *exit_img;
 	int xp;
 	int yp;
+	int collectibles;
 }	mlx_data;
 
 int last_line(int fd)
@@ -30,10 +31,9 @@ int last_line(int fd)
 	return (i);
 }
 
-int check_map(int fd, char *map_path, int *last)
+int check_map(int fd, char *map_path, int *last, mlx_data *data)
 {
 	int e = 0;
-	int c = 0;
 	int p = 0;
 	size_t i = 0;
 	*last = last_line(fd);
@@ -73,7 +73,7 @@ int check_map(int fd, char *map_path, int *last)
 		while(i < len - 2)
 		{
 			if (s[i] == 'C')
-				c += 1;
+				data->collectibles += 1;
 			else if (s[i] == 'E')
 				e += 1;
 			else if (s[i] == 'P')
@@ -84,7 +84,7 @@ int check_map(int fd, char *map_path, int *last)
 		}
 		s = get_next_line(fd);
 	}
-	if (!c || e != 1 || p != 1)
+	if (!data->collectibles|| e != 1 || p != 1)
 		return (close(fd), 4);
 	return (close(fd), 5);
 }
@@ -139,6 +139,7 @@ void rendering(mlx_data *data, int width, int height)
 
 int key_pressed_handler(int key, mlx_data *data)
 {
+	printf("%d\n", data->collectibles);
 	if (key == 126)
 	{
 		if (data->map_array[data->yp - 1][data->xp] == '1')
@@ -206,7 +207,7 @@ int main(int argc, char **argv)
 	int fd = open(map_path, O_RDONLY);
 	if (fd < 0)
 		return(perror("Map file error opening!"), 1);
-	if (check_map(fd, map_path, &last) != 5)
+	if (check_map(fd, map_path, &last, &data) != 5)
 		return(perror("Invalid map"), 1);
 	fd = open(map_path, O_RDONLY);
 	data.map_array = map_to_array(fd, last);
