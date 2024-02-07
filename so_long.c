@@ -171,6 +171,12 @@ int key_pressed_handler(int key, mlx_data *data)
 		mlx_put_image_to_window(data->mlx, data->window, data->back_img, (data->xp * 48), (data->yp * 48));
 		data->xp -= 1;
 	}
+	if (data->map_array[data->yp][data->xp] == 'C')
+	{
+		mlx_put_image_to_window(data->mlx, data->window, data->back_img, (data->xp * 48), (data->yp * 48));
+		mlx_put_image_to_window(data->mlx, data->window, data->player_img, (data->xp * 48), (data->yp * 48));
+		return(1);
+	}
 	return (0);
 }
 
