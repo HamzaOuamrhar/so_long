@@ -156,6 +156,8 @@ int key_pressed_handler(int key, mlx_data *data)
 		print_moves_count(data);
 		mlx_put_image_to_window(data->mlx, data->window, data->player_img, (data->xp * 48), (data->yp * 48 - 48));
 		mlx_put_image_to_window(data->mlx, data->window, data->back_img, (data->xp * 48), (data->yp * 48));
+		if (data->map_array[data->yp][data->xp] == 'E')
+			mlx_put_image_to_window(data->mlx, data->window, data->exit_img, (data->xp * 48), (data->yp * 48));
 		data->yp -= 1;
 	}
 	else if (key == 125)
@@ -165,6 +167,8 @@ int key_pressed_handler(int key, mlx_data *data)
 		print_moves_count(data);
 		mlx_put_image_to_window(data->mlx, data->window, data->player_img, (data->xp * 48), (data->yp * 48 + 48));
 		mlx_put_image_to_window(data->mlx, data->window, data->back_img, (data->xp * 48), (data->yp * 48));
+		if (data->map_array[data->yp][data->xp] == 'E')
+			mlx_put_image_to_window(data->mlx, data->window, data->exit_img, (data->xp * 48), (data->yp * 48));
 		data->yp += 1;
 	}
 	else if (key == 124)
@@ -174,6 +178,8 @@ int key_pressed_handler(int key, mlx_data *data)
 		print_moves_count(data);
 		mlx_put_image_to_window(data->mlx, data->window, data->player_img, (data->xp * 48 + 48), (data->yp * 48));
 		mlx_put_image_to_window(data->mlx, data->window, data->back_img, (data->xp * 48), (data->yp * 48));
+		if (data->map_array[data->yp][data->xp] == 'E')
+			mlx_put_image_to_window(data->mlx, data->window, data->exit_img, (data->xp * 48), (data->yp * 48));
 		data->xp += 1;
 	}
 	else if (key == 123)
@@ -183,6 +189,8 @@ int key_pressed_handler(int key, mlx_data *data)
 		print_moves_count(data);
 		mlx_put_image_to_window(data->mlx, data->window, data->player_img, (data->xp * 48 - 48), (data->yp * 48));
 		mlx_put_image_to_window(data->mlx, data->window, data->back_img, (data->xp * 48), (data->yp * 48));
+		if (data->map_array[data->yp][data->xp] == 'E')
+			mlx_put_image_to_window(data->mlx, data->window, data->exit_img, (data->xp * 48), (data->yp * 48));
 		data->xp -= 1;
 	}
 	else if (key == 53)
