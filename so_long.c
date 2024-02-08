@@ -315,12 +315,11 @@ int main(int argc, char **argv)
 		return(perror("Mlx pointer error!"), 1);
 	data.window = mlx_new_window(data.mlx, (width * 48), (height * 48), "so_long");
 	if (!data.window)
-		return(free(data.window), perror("Window error"), 1);
+		return(perror("Window error"), 1);
 	if (!open_and_validate_images(&data))
 		return(perror("Asset error!"), 1);
 	rendering(&data, (width * 48), (height * 48));
 	mlx_hook(data.window, 2, 0, &key_pressed_handler, &data);
 	mlx_hook(data.window, 17, 0, &close_window_handler, &data);
 	mlx_loop(data.mlx);
-	free(data.mlx);
 }
