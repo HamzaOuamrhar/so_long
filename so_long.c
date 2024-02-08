@@ -50,7 +50,7 @@ int check_map(int fd, char *map_path, int *last, mlx_data *data)
 	while(i < len - 2)
 	{
 		if (s[i] != '1')
-			return (close(fd), 1);
+			return (close(fd), 0);
 		i++;
 	}
 	s = get_next_line(fd);
@@ -58,21 +58,21 @@ int check_map(int fd, char *map_path, int *last, mlx_data *data)
 	{
 		if (first != *last)
 			if (len != ft_strlen(s))
-				return(close(fd), 7);
+				return(close(fd), 0);
 		i = 0;
 		if (first == *last)
 		{
 			if (len - 1 != ft_strlen(s))
-				return(close(fd), 8);
+				return(close(fd), 0);
 			while(i < len - 1)
 			{
 				if (s[i] != '1')
-					return (close(fd), 3);
+					return (close(fd), 0);
 				i++;
 			}
 		}
 		if (s[0] != '1' || s[len - 2] != '1')
-				return(close(fd), 2);
+				return(close(fd), 0);
 		while(i < len - 2)
 		{
 			if (s[i] == 'C')
@@ -86,15 +86,15 @@ int check_map(int fd, char *map_path, int *last, mlx_data *data)
 				data->yp = first - 1;
 			}
 			else if (s[i] != '0' && s[i] != '1')
-				return (close(fd), 6);
+				return (close(fd), 0);
 			i++;
 		}
 		first++;
 		s = get_next_line(fd);
 	}
-	if (!data->collectibles|| e != 1 || p != 1)
-		return (close(fd), 4);
-	return (close(fd), 5);
+	if (!data->collectibles || e != 1 || p != 1)
+		return (close(fd), 0);
+	return (close(fd), 1);
 }
 
 char **map_to_array(int fd, int last)
@@ -288,7 +288,7 @@ int main(int argc, char **argv)
 	int fd = open(map_path, O_RDONLY);
 	if (fd < 0)
 		return(perror("Map file error opening!"), 1);
-	if (check_map(fd, map_path, &last, &data) != 5)
+	if (check_map(fd, map_path, &last, &data) != 1)
 		return(perror("Invalid map"), 1);
 	fd = open(map_path, O_RDONLY);
 	data.map_array = map_to_array(fd, last);
