@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:11:33 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/08 21:47:23 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/08 22:26:45 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,6 @@ int validate_path(mlx_data data, int xp, int yp);
 int open_and_validate_images(mlx_data *data);
 void free_images(mlx_data *data);
 int last_line(int fd);
+int	check_last_line(size_t len, char *s);
 
 #endif
