@@ -29,6 +29,7 @@ int last_line(int fd)
 	while(s)
 	{
 		i++;
+		free(s);
 		s = get_next_line(fd);
 	}
 	close(fd);
