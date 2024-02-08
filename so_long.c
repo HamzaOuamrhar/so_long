@@ -232,11 +232,11 @@ int close_window_handler(mlx_data *data)
 
 void free_images(mlx_data *data)
 {
-	free(data->back_img);
-	free(data->col_img);
-	free(data->exit_img);
-	free(data->player_img);
-	free(data->wall_img);
+	mlx_destroy_image(data->back_img, data->mlx);
+	mlx_destroy_image(data->col_img, data->mlx);
+	mlx_destroy_image(data->exit_img, data->mlx);
+	mlx_destroy_image(data->player_img, data->mlx);
+	mlx_destroy_image(data->wall_img, data->mlx);
 }
 
 int open_and_validate_images(mlx_data *data)
@@ -347,5 +347,5 @@ int main(int argc, char **argv)
 	mlx_hook(data.window, 2, 0, &key_pressed_handler, &data);
 	mlx_hook(data.window, 17, 0, &close_window_handler, &data);
 	mlx_loop(data.mlx);
-	return(free(data.mlx), freeing(data), free_images(&data), 0);
+	return(free_images(&data), free(data.mlx), freeing(data), 0);
 }
