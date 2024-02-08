@@ -243,8 +243,17 @@ int open_and_validate_images(mlx_data *data)
 	data->player_img = mlx_xpm_file_to_image(data->mlx, "./textures/P.xpm", &k, &z);
 	data->wall_img = mlx_xpm_file_to_image(data->mlx, "./textures/1.xpm", &k, &z);
 	if (!data->back_img || !data->col_img || !data->exit_img || !data->player_img || !data->wall_img)
-		return (0);
+		return (free_images(data), 0);
 	return (1);
+}
+
+void free_images(mlx_data *data)
+{
+	free(data->back_img);
+	free(data->col_img);
+	free(data->exit_img);
+	free(data->player_img);
+	free(data->wall_img);
 }
 
 char **fill_map(mlx_data data, int xp, int yp)
