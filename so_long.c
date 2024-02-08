@@ -71,7 +71,6 @@ int check_map(int fd, char *map_path, int *last, mlx_data *data)
 				i++;
 			}
 		}
-		first++;
 		if (s[0] != '1' || s[len - 2] != '1')
 				return(close(fd), 2);
 		while(i < len - 2)
@@ -83,13 +82,14 @@ int check_map(int fd, char *map_path, int *last, mlx_data *data)
 			else if (s[i] == 'P')
 			{
 				p += 1;
-				data->xp = 1;
-				data->yp = 3;
+				data->xp = i;
+				data->yp = first - 1;
 			}
 			else if (s[i] != '0' && s[i] != '1')
 				return (close(fd), 6);
 			i++;
 		}
+		first++;
 		s = get_next_line(fd);
 	}
 	if (!data->collectibles|| e != 1 || p != 1)
