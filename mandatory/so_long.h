@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:11:33 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/08 21:14:03 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/08 21:47:23 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,15 @@ typedef struct mlx_data
 	int collected;
 	int moves;
 }	mlx_data;
+
+void print_moves_count(mlx_data *data);
+int valide_extension(char *path);
+int check_map(int fd, char *map_path, int *last, mlx_data *data);
+char **map_to_array(int fd, int last);
+void freeing(mlx_data data);
+int validate_path(mlx_data data, int xp, int yp);
+int open_and_validate_images(mlx_data *data);
+void free_images(mlx_data *data);
+int last_line(int fd);
 
 #endif

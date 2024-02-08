@@ -6,104 +6,11 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:12:31 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/08 21:29:50 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/08 21:40:25 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-int last_line(int fd)
-{
-	int i = 0;
-	char *s = get_next_line(fd);
-	while(s)
-	{
-		i++;
-		free(s);
-		s = get_next_line(fd);
-	}
-	close(fd);
-	return (i);
-}
-
-int check_map(int fd, char *map_path, int *last, mlx_data *data)
-{
-	int e = 0;
-	int p = 0;
-	size_t i = 0;
-	*last = last_line(fd);
-	int first = 2;
-	fd = open(map_path, O_RDONLY);
-	char *s = get_next_line(fd);
-	if (!s)
-		return(close(fd), 0);
-	size_t len = ft_strlen(s);
-	while(i < len - 2)
-	{
-		if (s[i] != '1')
-			return (close(fd), 0);
-		i++;
-	}
-	free(s);
-	s = get_next_line(fd);
-	while(s)
-	{
-		if (first != *last)
-			if (len != ft_strlen(s))
-				return(free(s), close(fd), 0);
-		i = 0;
-		if (first == *last)
-		{
-			if (len - 1 != ft_strlen(s))
-				return(free(s), close(fd), 0);
-			while(i < len - 1)
-			{
-				if (s[i] != '1')
-					return (free(s), close(fd), 0);
-				i++;
-			}
-		}
-		if (s[0] != '1' || s[len - 2] != '1')
-				return(free(s), close(fd), 0);
-		while(i < len - 2)
-		{
-			if (s[i] == 'C')
-				data->collectibles += 1;
-			else if (s[i] == 'E')
-				e += 1;
-			else if (s[i] == 'P')
-			{
-				p += 1;
-				data->xp = i;
-				data->yp = first - 1;
-			}
-			else if (s[i] != '0' && s[i] != '1')
-				return (free(s), close(fd), 0);
-			i++;
-		}
-		first++;
-		free(s);
-		s = get_next_line(fd);
-	}
-	if (!data->collectibles || e != 1 || p != 1)
-		return (close(fd), 0);
-	return (close(fd), 1);
-}
-
-char **map_to_array(int fd, int last)
-{
-	int i = 0;
-	char **map_array = (char **)malloc((last + 1) * sizeof(char *));
-	if (!map_array)
-		return (NULL);
-	while(i < last)
-	{
-		map_array[i] = get_next_line(fd);
-		i++;
-	}
-	map_array[i] = NULL;
-	return(map_array);
-}
 
 void rendering(mlx_data *data, int width, int height)
 {
@@ -134,13 +41,6 @@ void rendering(mlx_data *data, int width, int height)
 		f++;
 		i += 48;
 	}
-}
-
-void print_moves_count(mlx_data *data)
-{
-	data->moves += 1;
-	ft_putnbr_fd(data->moves, 1);
-	ft_putchar_fd('\n', 1);
 }
 
 int key_pressed_handler(int key, mlx_data *data)
@@ -219,88 +119,6 @@ int close_window_handler(mlx_data *data)
 {
 	mlx_destroy_window(data->mlx, data->window);
 	exit(0);
-}
-
-void free_images(mlx_data *data)
-{
-	mlx_destroy_image(data->back_img, data->mlx);
-	mlx_destroy_image(data->col_img, data->mlx);
-	mlx_destroy_image(data->exit_img, data->mlx);
-	mlx_destroy_image(data->player_img, data->mlx);
-	mlx_destroy_image(data->wall_img, data->mlx);
-}
-
-int open_and_validate_images(mlx_data *data)
-{
-	int k;
-	int z;
-	data->back_img = mlx_xpm_file_to_image(data->mlx, "./textures/square.xpm", &k, &z);
-	data->col_img = mlx_xpm_file_to_image(data->mlx, "./textures/C.xpm", &k, &z);
-	data->exit_img = mlx_xpm_file_to_image(data->mlx, "./textures/E.xpm", &k, &z);
-	data->player_img = mlx_xpm_file_to_image(data->mlx, "./textures/P.xpm", &k, &z);
-	data->wall_img = mlx_xpm_file_to_image(data->mlx, "./textures/1.xpm", &k, &z);
-	if (!data->back_img || !data->col_img || !data->exit_img || !data->player_img || !data->wall_img)
-		return (free_images(data), 0);
-	return (1);
-}
-
-char **fill_map(mlx_data data, int xp, int yp)
-{
-	if (data.map_array_copy[yp][xp] == '1' || data.map_array_copy[yp][xp] == 'Z')
-		return (data.map_array_copy);
-	data.map_array_copy[yp][xp] = 'Z';
-	fill_map(data, xp, yp - 1);
-	fill_map(data, xp, yp + 1);
-	fill_map(data, xp - 1, yp);
-	fill_map(data, xp + 1, yp);
-	return (data.map_array_copy);
-}
-
-int validate_path(mlx_data data, int xp, int yp)
-{
-	int x = 0;
-	int y = 0;
-	char **map_array_copy = fill_map(data, xp, yp);
-	while(map_array_copy[y])
-	{
-		x = 0;
-		while(map_array_copy[y][x])
-		{
-			if (map_array_copy[y][x] == 'C' || map_array_copy[y][x] == 'E')
-				return (0);
-			x++;
-		}
-		y++;
-	}
-	return (1);
-}
-
-void free_array(char **array)
-{
-	int i = 0;
-	while(array[i])
-	{
-		free(array[i]);
-		i++;
-	}
-	free(array);
-}
-
-void freeing(mlx_data data)
-{
-	free_array(data.map_array);
-	free_array(data.map_array_copy);
-}
-
-int valide_extension(char *path)
-{
-	char *p = path;
-	int len = ft_strlen(path);
-	int i = len - 4;
-	p += i;
-	if (ft_strncmp(p, ".ber", 4) != 0)
-		return (0);
-	return (1);
 }
 
 int main(int argc, char **argv)
