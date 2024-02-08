@@ -4,7 +4,7 @@ FFLAGS = -lmlx -framework OpenGL -framework AppKit
 NAME = so_long
 LIBFT = ./Libft/libft.a
 library = ./mandatory/so_long.h
-SRC = ./mandatory/so_long.c ./mandatory/images_check.c ./mandatory/map_check.c ./mandatory/so_long_utils.c
+SRC = ./mandatory/so_long.c ./mandatory/images_check.c ./mandatory/map_check.c ./mandatory/so_long_utils.c ./mandatory/check_map_function_utils.c
 OBJ = $(SRC:.c=.o)
 GNLS = ./get_next_line/get_next_line.c ./get_next_line/get_next_line_utils.c
 GNL = $(GNLS:.c=.o)
