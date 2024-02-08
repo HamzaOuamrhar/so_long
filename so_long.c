@@ -276,14 +276,25 @@ int validate_path(mlx_data data, int xp, int yp)
 	return (1);
 }
 
-void f()
+void free_array(char **array)
 {
-	system("leaks so_long");
+	int i = 0;
+	while(array[i])
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
+}
+
+void freeing(mlx_data data)
+{
+	free_array(data.map_array);
+	free_array(data.map_array_copy);
 }
 
 int main(int argc, char **argv)
 {
-	atexit(f);
 	mlx_data data;
 	int height;
 	size_t width;
@@ -304,20 +315,20 @@ int main(int argc, char **argv)
 	fd = open(map_path, O_RDONLY);
 	data.map_array_copy = map_to_array(fd, last);
 	if (!data.map_array_copy)
-		return(close(fd), perror("Malloc error!"), 1);
+		return(close(fd), free_array(data.map_array), perror("Malloc error!"), 1);
 	close(fd);
 	height = last;
 	width = ft_strlen(data.map_array[0]) - 1;
 	if (!validate_path(data, data.xp, data.yp))
-		return (perror("Path invalid!"), 1);
+		return (freeing(data), perror("Path invalid!"), 1);
 	data.mlx = mlx_init();
 	if (!data.mlx)
-		return(perror("Mlx pointer error!"), 1);
+		return(freeing(data), perror("Mlx pointer error!"), 1);
 	data.window = mlx_new_window(data.mlx, (width * 48), (height * 48), "so_long");
 	if (!data.window)
-		return(perror("Window error"), 1);
+		return(freeing(data), perror("Window error"), 1);
 	if (!open_and_validate_images(&data))
-		return(perror("Asset error!"), 1);
+		return(freeing(data), perror("Asset error!"), 1);
 	rendering(&data, (width * 48), (height * 48));
 	mlx_hook(data.window, 2, 0, &key_pressed_handler, &data);
 	mlx_hook(data.window, 17, 0, &close_window_handler, &data);
