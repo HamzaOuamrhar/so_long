@@ -53,26 +53,27 @@ int check_map(int fd, char *map_path, int *last, mlx_data *data)
 			return (close(fd), 0);
 		i++;
 	}
+	free(s);
 	s = get_next_line(fd);
 	while(s)
 	{
 		if (first != *last)
 			if (len != ft_strlen(s))
-				return(close(fd), 0);
+				return(free(s), close(fd), 0);
 		i = 0;
 		if (first == *last)
 		{
 			if (len - 1 != ft_strlen(s))
-				return(close(fd), 0);
+				return(free(s), close(fd), 0);
 			while(i < len - 1)
 			{
 				if (s[i] != '1')
-					return (close(fd), 0);
+					return (free(s), close(fd), 0);
 				i++;
 			}
 		}
 		if (s[0] != '1' || s[len - 2] != '1')
-				return(close(fd), 0);
+				return(free(s), close(fd), 0);
 		while(i < len - 2)
 		{
 			if (s[i] == 'C')
@@ -86,10 +87,11 @@ int check_map(int fd, char *map_path, int *last, mlx_data *data)
 				data->yp = first - 1;
 			}
 			else if (s[i] != '0' && s[i] != '1')
-				return (close(fd), 0);
+				return (free(s), close(fd), 0);
 			i++;
 		}
 		first++;
+		free(s);
 		s = get_next_line(fd);
 	}
 	if (!data->collectibles || e != 1 || p != 1)
@@ -293,8 +295,14 @@ void freeing(mlx_data data)
 	free_array(data.map_array_copy);
 }
 
+void f()
+{
+	system("leaks so_long");
+}
+
 int main(int argc, char **argv)
 {
+	atexit(f);
 	mlx_data data;
 	int height;
 	size_t width;
