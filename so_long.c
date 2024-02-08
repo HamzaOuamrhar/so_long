@@ -101,6 +101,8 @@ char **map_to_array(int fd, int last)
 {
 	int i = 0;
 	char **map_array = (char **)malloc((last + 1) * sizeof(char *));
+	if (!map_array)
+		return (NULL);
 	while(i < last)
 	{
 		map_array[i] = get_next_line(fd);
@@ -290,9 +292,13 @@ int main(int argc, char **argv)
 		return(perror("Invalid map"), 1);
 	fd = open(map_path, O_RDONLY);
 	data.map_array = map_to_array(fd, last);
+	if (!data.map_array)
+		return (perror("Malloc error!"), 1);
 	close(fd);
 	fd = open(map_path, O_RDONLY);
 	data.map_array_copy = map_to_array(fd, last);
+	if (!data.map_array_copy)
+		return(perror("Malloc error!"), 1);
 	height = last;
 	width = ft_strlen(data.map_array[0]) - 1;
 	if (!validate_path(data, data.xp, data.yp))
