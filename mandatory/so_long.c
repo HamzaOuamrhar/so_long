@@ -1,26 +1,16 @@
-#include <mlx.h>
-#include <stdio.h>
-#include <fcntl.h>
-#include "./get_next_line/get_next_line.h"
-#include "./Libft/libft.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/08 21:12:31 by houamrha          #+#    #+#             */
+/*   Updated: 2024/02/08 21:29:50 by houamrha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-typedef struct mlx_data
-{
-	void *mlx;
-	void *window;
-	char **map_array;
-	char **map_array_copy;
-	void *player_img;
-	void *wall_img;
-	void *col_img;
-	void *back_img;
-	void *exit_img;
-	int xp;
-	int yp;
-	int collectibles;
-	int collected;
-	int moves;
-}	mlx_data;
+#include "so_long.h"
 
 int last_line(int fd)
 {
@@ -302,14 +292,19 @@ void freeing(mlx_data data)
 	free_array(data.map_array_copy);
 }
 
-void f()
+int valide_extension(char *path)
 {
-	system("leaks so_long");
+	char *p = path;
+	int len = ft_strlen(path);
+	int i = len - 4;
+	p += i;
+	if (ft_strncmp(p, ".ber", 4) != 0)
+		return (0);
+	return (1);
 }
 
 int main(int argc, char **argv)
 {
-	atexit(f);
 	mlx_data data;
 	int height;
 	size_t width;
@@ -317,6 +312,8 @@ int main(int argc, char **argv)
 	if (argc != 2)
 		return(perror("Incorrect number of arguments!"), 1);
 	char *map_path = argv[1];
+	if (!valide_extension(map_path))
+		return (perror("Invalid file extension!"), 1);
 	int fd = open(map_path, O_RDONLY);
 	if (fd < 0)
 		return(perror("Map file error opening!"), 1);

@@ -3,8 +3,8 @@ CFLAGS = -Wall -Wextra -Werror
 FFLAGS = -lmlx -framework OpenGL -framework AppKit
 NAME = so_long
 LIBFT = ./Libft/libft.a
-library = so_long.h
-SRC = so_long.c
+library = ./mandatory/so_long.h
+SRC = ./mandatory/so_long.c
 OBJ = $(SRC:.c=.o)
 GNLS = ./get_next_line/get_next_line.c ./get_next_line/get_next_line_utils.c
 GNL = $(GNLS:.c=.o)
