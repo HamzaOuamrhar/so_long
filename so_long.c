@@ -201,7 +201,6 @@ int key_pressed_handler(int key, mlx_data *data)
 	else if (key == 53)
 	{
 		mlx_destroy_window(data->mlx, data->window);
-		free(data->mlx);
 		exit(0);
 	}
 	if (data->map_array[data->yp][data->xp] == 'C')
@@ -217,7 +216,6 @@ int key_pressed_handler(int key, mlx_data *data)
 		if (data->collected == data->collectibles)
 		{
 			mlx_destroy_window(data->mlx, data->window);
-			free(data->mlx);
 			exit(0);
 		}
 		else
@@ -229,7 +227,6 @@ int key_pressed_handler(int key, mlx_data *data)
 int close_window_handler(mlx_data *data)
 {
 	mlx_destroy_window(data->mlx, data->window);
-	free(data->mlx);
 	exit(0);
 }
 
