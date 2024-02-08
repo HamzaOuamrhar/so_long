@@ -276,8 +276,14 @@ int validate_path(mlx_data data, int xp, int yp)
 	return (1);
 }
 
+void f()
+{
+	system("leaks so_long");
+}
+
 int main(int argc, char **argv)
 {
+	atexit(f);
 	mlx_data data;
 	int height;
 	size_t width;
@@ -293,12 +299,13 @@ int main(int argc, char **argv)
 	fd = open(map_path, O_RDONLY);
 	data.map_array = map_to_array(fd, last);
 	if (!data.map_array)
-		return (perror("Malloc error!"), 1);
+		return (close(fd), perror("Malloc error!"), 1);
 	close(fd);
 	fd = open(map_path, O_RDONLY);
 	data.map_array_copy = map_to_array(fd, last);
 	if (!data.map_array_copy)
-		return(perror("Malloc error!"), 1);
+		return(close(fd), perror("Malloc error!"), 1);
+	close(fd);
 	height = last;
 	width = ft_strlen(data.map_array[0]) - 1;
 	if (!validate_path(data, data.xp, data.yp))
