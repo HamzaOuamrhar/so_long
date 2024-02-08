@@ -9,6 +9,7 @@ typedef struct mlx_data
 	void *mlx;
 	void *window;
 	char **map_array;
+	char **map_array_copy;
 	void *player_img;
 	void *wall_img;
 	void *col_img;
@@ -80,7 +81,11 @@ int check_map(int fd, char *map_path, int *last, mlx_data *data)
 			else if (s[i] == 'E')
 				e += 1;
 			else if (s[i] == 'P')
+			{
 				p += 1;
+				data->xp = 1;
+				data->yp = 3;
+			}
 			else if (s[i] != '0' && s[i] != '1')
 				return (close(fd), 6);
 			i++;
@@ -123,11 +128,7 @@ void rendering(mlx_data *data, int width, int height)
 			else if (data->map_array[f][l] == 'C')
 				mlx_put_image_to_window(data->mlx, data->window, data->col_img, j, i);
 			else if (data->map_array[f][l] == 'P')
-			{
 				mlx_put_image_to_window(data->mlx, data->window, data->player_img, j, i);
-				data->xp = l;
-				data->yp = f;
-			}
 			else if (data->map_array[f][l] == 'E')
 				mlx_put_image_to_window(data->mlx, data->window, data->exit_img, j, i);
 			else
@@ -242,6 +243,37 @@ int open_and_validate_images(mlx_data *data)
 	return (1);
 }
 
+char **fill_map(mlx_data data, int xp, int yp)
+{
+	if (data.map_array_copy[yp][xp] == '1' || data.map_array_copy[yp][xp] == 'Z')
+		return (data.map_array_copy);
+	data.map_array_copy[yp][xp] = 'Z';
+	fill_map(data, xp, yp - 1);
+	fill_map(data, xp, yp + 1);
+	fill_map(data, xp - 1, yp);
+	fill_map(data, xp + 1, yp);
+	return (data.map_array_copy);
+}
+
+int validate_path(mlx_data data, int xp, int yp)
+{
+	int x = 0;
+	int y = 0;
+	char **map_array_copy = fill_map(data, xp, yp);
+	while(map_array_copy[y])
+	{
+		x = 0;
+		while(map_array_copy[y][x])
+		{
+			if (map_array_copy[y][x] == 'C' || map_array_copy[y][x] == 'E')
+				return (0);
+			x++;
+		}
+		y++;
+	}
+	return (1);
+}
+
 int main(int argc, char **argv)
 {
 	mlx_data data;
@@ -258,8 +290,13 @@ int main(int argc, char **argv)
 		return(perror("Invalid map"), 1);
 	fd = open(map_path, O_RDONLY);
 	data.map_array = map_to_array(fd, last);
+	close(fd);
+	fd = open(map_path, O_RDONLY);
+	data.map_array_copy = map_to_array(fd, last);
 	height = last;
 	width = ft_strlen(data.map_array[0]) - 1;
+	if (!validate_path(data, data.xp, data.yp))
+		return (perror("Path invalid!"), 1);
 	data.mlx = mlx_init();
 	if (!data.mlx)
 		return(perror("Mlx pointer error!"), 1);
