@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:11:33 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/09 18:00:59 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/09 19:11:08 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,6 @@ void	down_key(mlx_data *data);
 void	right_key(mlx_data *data);
 void	left_key(mlx_data *data);
 int	handle_keys(int key, mlx_data *data);
+int	arrays(mlx_data *data, int fd, int last, char *map_path);
 
 #endif

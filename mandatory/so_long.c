@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:12:31 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/09 18:17:13 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/09 19:12:21 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,47 +73,43 @@ int	close_window_handler(mlx_data *data)
 	exit(0);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	mlx_data data;
-	int height;
-	size_t width;
-	int last;
+	mlx_data	data;
+	int			height;
+	size_t		width;
+	int			last;
+	char		*map_path;
+	int			fd;
+
 	if (argc != 2)
-		return(perror("Incorrect number of arguments!"), 1);
-	char *map_path = argv[1];
+		return (perror("Incorrect number of arguments!"), 1);
+	map_path = argv[1];
 	if (!valide_extension(map_path))
 		return (perror("Invalid file extension!"), 1);
-	int fd = open(map_path, O_RDONLY);
+	fd = open(map_path, O_RDONLY);
 	if (fd < 0)
-		return(perror("Map file error opening!"), 1);
+		return (perror("Map file error opening!"), 1);
 	if (check_map(fd, map_path, &last, &data) != 1)
-		return(perror("Invalid map"), 1);
-	fd = open(map_path, O_RDONLY);
-	data.map_array = map_to_array(fd, last);
-	if (!data.map_array)
-		return (close(fd), perror("Malloc error!"), 1);
-	close(fd);
-	fd = open(map_path, O_RDONLY);
-	data.map_array_copy = map_to_array(fd, last);
-	if (!data.map_array_copy)
-		return(close(fd), freeing(data), perror("Malloc error!"), 1);
-	close(fd);
+		return (perror("Invalid map"), 1);
+	if (!arrays(&data, fd, last, map_path))
+		return (close(fd), freeing(data), perror("Fd or Malloc Error!"), 1);
 	height = last;
 	width = ft_strlen(data.map_array[0]) - 1;
 	if (!validate_path(data, data.xp, data.yp))
 		return (freeing(data), perror("Path invalid!"), 1);
 	data.mlx = mlx_init();
 	if (!data.mlx)
-		return(freeing(data), perror("Mlx pointer error!"), 1);
-	data.window = mlx_new_window(data.mlx, (width * 48), (height * 48), "so_long");
+		return (freeing(data), perror("Mlx pointer error!"), 1);
+	data.window = mlx_new_window(data.mlx,
+			(width * 48), (height * 48), "so_long");
 	if (!data.window)
-		return(free(data.mlx), freeing(data), perror("Window error"), 1);
+		return (free(data.mlx), freeing(data), perror("Window error"), 1);
 	if (!open_and_validate_images(&data))
-		return(free(data.mlx), freeing(data), perror("Asset error!"), 1);
+		return (free(data.mlx), freeing(data), perror("Asset error!"), 1);
 	rendering(&data, (width * 48), (height * 48));
 	mlx_hook(data.window, 2, 0, &key_pressed_handler, &data);
 	mlx_hook(data.window, 17, 0, &close_window_handler, &data);
 	mlx_loop(data.mlx);
-	return(free_images(&data), free(data.mlx), freeing(data), 0);
+	return (free_images(&data), free(data.mlx), freeing(data), 0);
 }

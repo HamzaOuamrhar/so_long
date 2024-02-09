@@ -6,7 +6,7 @@
 #    By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/09 17:15:58 by houamrha          #+#    #+#              #
-#    Updated: 2024/02/09 17:50:08 by houamrha         ###   ########.fr        #
+#    Updated: 2024/02/09 18:38:30 by houamrha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ NAME = so_long
 LIBFT = ./Libft/libft.a
 library = ./mandatory/so_long.h
 SRC = ./mandatory/so_long.c ./mandatory/images_check.c ./mandatory/map_check.c ./mandatory/so_long_utils.c ./mandatory/check_map_function_utils.c \
-./mandatory/mlx_utils.c ./mandatory/key_pressed_utils.c
+./mandatory/mlx_utils.c ./mandatory/key_pressed_utils.c ./mandatory/so_long_utils_2.c
 OBJ = $(SRC:.c=.o)
 GNLS = ./get_next_line/get_next_line.c ./get_next_line/get_next_line_utils.c
 GNL = $(GNLS:.c=.o)
