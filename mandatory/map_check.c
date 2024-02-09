@@ -6,15 +6,14 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:36:03 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/09 16:30:37 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/09 16:50:36 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int check_map(int fd, char *map_path, int *last, mlx_data *data)
+int	check_map(int fd, char *map_path, int *last, mlx_data *data)
 {
-	size_t	i;
 	int		first;
 	char	*s;
 	size_t	len;
@@ -28,15 +27,9 @@ int check_map(int fd, char *map_path, int *last, mlx_data *data)
 	s = get_next_line(fd);
 	while (s)
 	{
-		i = 0;
-		if (!multiple_checks(first, *last, len, s))
+		if (!multiple_checks(first, *last, len, s)
+			|| !check_chars(data, s, first, len))
 			return (close(fd), free(s), 0);
-		while (i < len - 2)
-		{
-			if (!check_chars(i, data, s, first))
-				return (free(s), close(fd), 0);
-			i++;
-		}
 		first++;
 		free(s);
 		s = get_next_line(fd);
