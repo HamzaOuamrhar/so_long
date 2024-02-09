@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:12:31 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/09 19:12:21 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/09 21:26:11 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,7 @@ int	main(int argc, char **argv)
 	if (!valide_extension(map_path))
 		return (perror("Invalid file extension!"), 1);
 	fd = open(map_path, O_RDONLY);
-	if (fd < 0)
-		return (perror("Map file error opening!"), 1);
-	if (check_map(fd, map_path, &last, &data) != 1)
+	if (!check_map(fd, map_path, &last, &data))
 		return (perror("Invalid map"), 1);
 	if (!arrays(&data, fd, last, map_path))
 		return (close(fd), freeing(data), perror("Fd or Malloc Error!"), 1);
