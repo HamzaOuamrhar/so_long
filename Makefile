@@ -6,7 +6,7 @@
 #    By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/09 17:15:58 by houamrha          #+#    #+#              #
-#    Updated: 2024/02/09 18:38:30 by houamrha         ###   ########.fr        #
+#    Updated: 2024/02/09 23:30:41 by houamrha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,18 +22,23 @@ OBJ = $(SRC:.c=.o)
 GNLS = ./get_next_line/get_next_line.c ./get_next_line/get_next_line_utils.c
 GNL = $(GNLS:.c=.o)
 HEADER = ./mandatory/so_long.h
+GN_HEADER = ./get_next_line/get_next_line.h
+LF_HEADER = ./Libft/libft.h
 
 all: libft $(NAME)
 
 libft: $(LIBFT)
 
-$(LIBFT):
+$(LIBFT): $(LF_HEADER)
 	make -C Libft
 
-$(NAME): $(OBJ) $(LIBFT) $(GNL) $(HEADER)
+$(NAME): $(OBJ) $(LIBFT) $(GNL)
 	$(CC) $(OBJ) $(LIBFT) $(GNL) $(FFLAGS) -o $(NAME)
 
-%.o: %.c
+./mandatory/%.o: ./mandatory/%.c $(HEADER)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+./get_next_line/%.o: ./get_next_line/%.c $(GN_HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 get_next_line/%.o: get_next_line/%.C
