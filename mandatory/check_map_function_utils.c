@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 22:15:27 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/09 16:19:51 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/09 16:33:08 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,23 @@ int	multiple_checks(int first, int last, size_t len, char *s)
 			return (0);
 	if (s[0] != '1' || s[len - 2] != '1')
 		return (0);
+	return (1);
+}
+
+int	check_first_line(char *s, size_t *len)
+{
+	size_t	i;
+
+	i = 0;
+	if (!s)
+		return (0);
+	*len = ft_strlen(s);
+	while (i < *len - 1)
+	{
+		if (s[i] != '1')
+			return (0);
+		i++;
+	}
+	free(s);
 	return (1);
 }

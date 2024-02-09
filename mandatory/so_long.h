@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:11:33 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/09 16:18:56 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/09 16:30:18 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ int last_line(int fd);
 int	check_last_line(size_t len, char *s);
 int	check_chars(int i, mlx_data *data, char *s, int first);
 int	multiple_checks(int first, int last, size_t len, char *s);
+int	check_first_line(char *s, size_t *len);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:36:03 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/09 16:19:28 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/09 16:30:37 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,12 @@ int check_map(int fd, char *map_path, int *last, mlx_data *data)
 	char	*s;
 	size_t	len;
 
-	i = 0;
 	*last = last_line(fd);
 	first = 2;
 	fd = open(map_path, O_RDONLY);
 	s = get_next_line(fd);
-	if (!s)
+	if (!check_first_line(s, &len))
 		return (close(fd), 0);
-	len = ft_strlen(s);
-	while (i < len - 2)
-	{
-		if (s[i] != '1')
-			return (close(fd), 0);
-		i++;
-	}
-	free(s);
 	s = get_next_line(fd);
 	while (s)
 	{
