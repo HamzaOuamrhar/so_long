@@ -6,13 +6,13 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:36:03 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/09 21:25:19 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/09 21:59:32 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	check_map(int fd, char *map_path, int *last, mlx_data *data)
+int	check_map(int fd, char *map_path, int *last, t_mlx_data *data)
 {
 	int		first;
 	char	*s;
@@ -41,7 +41,7 @@ int	check_map(int fd, char *map_path, int *last, mlx_data *data)
 	return (close(fd), 1);
 }
 
-char	**fill_map(mlx_data data, int xp, int yp)
+char	**fill_map(t_mlx_data data, int xp, int yp)
 {
 	if (data.map_array_copy[yp][xp] == '1'
 		|| data.map_array_copy[yp][xp] == 'Z')
@@ -54,7 +54,7 @@ char	**fill_map(mlx_data data, int xp, int yp)
 	return (data.map_array_copy);
 }
 
-int	validate_path(mlx_data data, int xp, int yp)
+int	validate_path(t_mlx_data data, int xp, int yp)
 {
 	int		x;
 	int		y;

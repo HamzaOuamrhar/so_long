@@ -6,13 +6,13 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 16:59:04 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/09 17:07:26 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/09 21:59:46 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	put_images(mlx_data *data, rendering_pos rp)
+void	put_images(t_mlx_data *data, t_rendering_pos rp)
 {
 	mlx_put_image_to_window(data->mlx, data->window,
 		data->back_img, rp.j, rp.i);

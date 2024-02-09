@@ -6,15 +6,15 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:12:31 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/09 21:26:11 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/09 22:00:32 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	rendering(mlx_data *data, int width, int height)
+void	rendering(t_mlx_data *data, int width, int height)
 {
-	rendering_pos	rp;
+	t_rendering_pos	rp;
 
 	rp.i = 0;
 	rp.f = 0;
@@ -33,7 +33,7 @@ void	rendering(mlx_data *data, int width, int height)
 	}
 }
 
-void	collecting(mlx_data *data)
+void	collecting(t_mlx_data *data)
 {
 	data->map_array[data->yp][data->xp] = '0';
 	data->collected += 1;
@@ -43,7 +43,7 @@ void	collecting(mlx_data *data)
 		(data->xp * 48), (data->yp * 48));
 }
 
-int	key_pressed_handler(int key, mlx_data *data)
+int	key_pressed_handler(int key, t_mlx_data *data)
 {
 	if (!handle_keys(key, data))
 		return (1);
@@ -67,17 +67,24 @@ int	key_pressed_handler(int key, mlx_data *data)
 	return (0);
 }
 
-int	close_window_handler(mlx_data *data)
+int	initialize_game(t_mlx_data *data)
 {
-	mlx_destroy_window(data->mlx, data->window);
-	exit(0);
+	data->mlx = mlx_init();
+	if (!data->mlx)
+		return (freeing(data), perror("Mlx pointer error!"), 0);
+	data->window = mlx_new_window(data->mlx,
+			(data->width * 48), (data->height * 48), "so_long");
+	if (!data->window)
+		return (free(data->mlx), freeing(data), perror("Window error"), 0);
+	if (!open_and_validate_images(data))
+		return (free(data->mlx), freeing(data), perror("Asset error!"), 0);
+	rendering(data, (data->width * 48), (data->height * 48));
+	return (1);
 }
 
 int	main(int argc, char **argv)
 {
-	mlx_data	data;
-	int			height;
-	size_t		width;
+	t_mlx_data	data;
 	int			last;
 	char		*map_path;
 	int			fd;
@@ -91,23 +98,13 @@ int	main(int argc, char **argv)
 	if (!check_map(fd, map_path, &last, &data))
 		return (perror("Invalid map"), 1);
 	if (!arrays(&data, fd, last, map_path))
-		return (close(fd), freeing(data), perror("Fd or Malloc Error!"), 1);
-	height = last;
-	width = ft_strlen(data.map_array[0]) - 1;
+		return (close(fd), freeing(&data), perror("Fd or Malloc Error!"), 1);
 	if (!validate_path(data, data.xp, data.yp))
-		return (freeing(data), perror("Path invalid!"), 1);
-	data.mlx = mlx_init();
-	if (!data.mlx)
-		return (freeing(data), perror("Mlx pointer error!"), 1);
-	data.window = mlx_new_window(data.mlx,
-			(width * 48), (height * 48), "so_long");
-	if (!data.window)
-		return (free(data.mlx), freeing(data), perror("Window error"), 1);
-	if (!open_and_validate_images(&data))
-		return (free(data.mlx), freeing(data), perror("Asset error!"), 1);
-	rendering(&data, (width * 48), (height * 48));
+		return (freeing(&data), perror("Path invalid!"), 1);
+	if (!initialize_game(&data))
+		return (1);
 	mlx_hook(data.window, 2, 0, &key_pressed_handler, &data);
 	mlx_hook(data.window, 17, 0, &close_window_handler, &data);
 	mlx_loop(data.mlx);
-	return (free_images(&data), free(data.mlx), freeing(data), 0);
+	return (free_images(&data), free(data.mlx), freeing(&data), 0);
 }

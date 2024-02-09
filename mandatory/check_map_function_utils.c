@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 22:15:27 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/09 16:47:00 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/09 21:58:48 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	check_last_line(size_t len, char *s)
 	return (1);
 }
 
-int	check_chars(mlx_data *data, char *s, int first, size_t len)
+int	check_chars(t_mlx_data *data, char *s, int first, size_t len)
 {
 	size_t	i;
 

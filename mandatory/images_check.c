@@ -6,13 +6,13 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:40:34 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/08 22:06:08 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/09 21:59:04 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	free_images(mlx_data *data)
+void	free_images(t_mlx_data *data)
 {
 	mlx_destroy_image(data->back_img, data->mlx);
 	mlx_destroy_image(data->col_img, data->mlx);
@@ -21,7 +21,7 @@ void	free_images(mlx_data *data)
 	mlx_destroy_image(data->wall_img, data->mlx);
 }
 
-int	open_and_validate_images(mlx_data *data)
+int	open_and_validate_images(t_mlx_data *data)
 {
 	int	k;
 	int	z;

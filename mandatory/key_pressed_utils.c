@@ -6,13 +6,13 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:47:37 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/09 18:09:40 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/09 21:59:21 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	handle_keys(int key, mlx_data *data)
+int	handle_keys(int key, t_mlx_data *data)
 {
 	if (key == 126)
 	{
@@ -41,7 +41,7 @@ int	handle_keys(int key, mlx_data *data)
 	return (1);
 }
 
-void	up_key(mlx_data *data)
+void	up_key(t_mlx_data *data)
 {
 	print_moves_count(data);
 	mlx_put_image_to_window(data->mlx, data->window, data->player_img,
@@ -54,7 +54,7 @@ void	up_key(mlx_data *data)
 	data->yp -= 1;
 }
 
-void	down_key(mlx_data *data)
+void	down_key(t_mlx_data *data)
 {
 	print_moves_count(data);
 	mlx_put_image_to_window(data->mlx, data->window, data->player_img,
@@ -67,7 +67,7 @@ void	down_key(mlx_data *data)
 	data->yp += 1;
 }
 
-void	right_key(mlx_data *data)
+void	right_key(t_mlx_data *data)
 {
 	print_moves_count(data);
 	mlx_put_image_to_window(data->mlx, data->window, data->player_img,
@@ -80,7 +80,7 @@ void	right_key(mlx_data *data)
 	data->xp += 1;
 }
 
-void	left_key(mlx_data *data)
+void	left_key(t_mlx_data *data)
 {
 	print_moves_count(data);
 	mlx_put_image_to_window(data->mlx, data->window, data->player_img,

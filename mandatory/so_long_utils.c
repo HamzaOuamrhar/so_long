@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:38:47 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/09 16:54:08 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/09 22:00:09 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,13 @@ void	free_array(char **array)
 	free(array);
 }
 
-void	freeing(mlx_data data)
+void	freeing(t_mlx_data *data)
 {
-	free_array(data.map_array);
-	free_array(data.map_array_copy);
+	free_array(data->map_array);
+	free_array(data->map_array_copy);
 }
 
-void	print_moves_count(mlx_data *data)
+void	print_moves_count(t_mlx_data *data)
 {
 	data->moves += 1;
 	ft_putnbr_fd(data->moves, 1);
