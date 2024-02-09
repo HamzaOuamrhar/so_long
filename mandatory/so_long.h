@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:11:33 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/08 22:47:23 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/09 16:18:56 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,6 @@ void free_images(mlx_data *data);
 int last_line(int fd);
 int	check_last_line(size_t len, char *s);
 int	check_chars(int i, mlx_data *data, char *s, int first);
+int	multiple_checks(int first, int last, size_t len, char *s);
 
 #endif
