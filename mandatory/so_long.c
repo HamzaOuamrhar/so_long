@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:12:31 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/09 17:14:01 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/09 17:16:40 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int key_pressed_handler(int key, mlx_data *data)
 	return (0);
 }
 
-int close_window_handler(mlx_data *data)
+int	close_window_handler(mlx_data *data)
 {
 	mlx_destroy_window(data->mlx, data->window);
 	exit(0);
