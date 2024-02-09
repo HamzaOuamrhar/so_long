@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 22:15:27 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/08 22:25:34 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/08 22:46:57 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,22 @@ int	check_last_line(size_t len, char *s)
 			return (0);
 		i++;
 	}
+	return (1);
+}
+
+int	check_chars(int i, mlx_data *data, char *s, int first)
+{
+	if (s[i] == 'C')
+		data->collectibles += 1;
+	else if (s[i] == 'E')
+		data->e += 1;
+	else if (s[i] == 'P')
+	{
+		data->p += 1;
+		data->xp = i;
+		data->yp = first - 1;
+	}
+	else if (s[i] != '0' && s[i] != '1')
+		return (0);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:11:33 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/08 22:26:45 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/08 22:47:23 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ typedef struct mlx_data
 	int collectibles;
 	int collected;
 	int moves;
+	int e;
+	int p;
 }	mlx_data;
 
 void print_moves_count(mlx_data *data);
@@ -47,5 +49,6 @@ int open_and_validate_images(mlx_data *data);
 void free_images(mlx_data *data);
 int last_line(int fd);
 int	check_last_line(size_t len, char *s);
+int	check_chars(int i, mlx_data *data, char *s, int first);
 
 #endif

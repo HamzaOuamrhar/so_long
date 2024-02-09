@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:36:03 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/08 22:23:34 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/08 22:48:59 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,11 @@
 
 int check_map(int fd, char *map_path, int *last, mlx_data *data)
 {
-	int		e;
-	int		p;
 	size_t	i;
 	int		first;
 	char	*s;
 	size_t	len;
 
-	e = 0;
-	p = 0;
 	i = 0;
 	*last = last_line(fd);
 	first = 2;
@@ -52,17 +48,7 @@ int check_map(int fd, char *map_path, int *last, mlx_data *data)
 			return (free(s), close(fd), 0);
 		while (i < len - 2)
 		{
-			if (s[i] == 'C')
-				data->collectibles += 1;
-			else if (s[i] == 'E')
-				e += 1;
-			else if (s[i] == 'P')
-			{
-				p += 1;
-				data->xp = i;
-				data->yp = first - 1;
-			}
-			else if (s[i] != '0' && s[i] != '1')
+			if (!check_chars(i, data, s, first))
 				return (free(s), close(fd), 0);
 			i++;
 		}
@@ -70,7 +56,7 @@ int check_map(int fd, char *map_path, int *last, mlx_data *data)
 		free(s);
 		s = get_next_line(fd);
 	}
-	if (!data->collectibles || e != 1 || p != 1)
+	if (!data->collectibles || data->e != 1 || data->p != 1)
 		return (close(fd), 0);
 	return (close(fd), 1);
 }
