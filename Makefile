@@ -4,10 +4,12 @@ FFLAGS = -lmlx -framework OpenGL -framework AppKit
 NAME = so_long
 LIBFT = ./Libft/libft.a
 library = ./mandatory/so_long.h
-SRC = ./mandatory/so_long.c ./mandatory/images_check.c ./mandatory/map_check.c ./mandatory/so_long_utils.c ./mandatory/check_map_function_utils.c
+SRC = ./mandatory/so_long.c ./mandatory/images_check.c ./mandatory/map_check.c ./mandatory/so_long_utils.c ./mandatory/check_map_function_utils.c \
+./mandatory/mlx_utils.c
 OBJ = $(SRC:.c=.o)
 GNLS = ./get_next_line/get_next_line.c ./get_next_line/get_next_line_utils.c
 GNL = $(GNLS:.c=.o)
+HEADER = ./mandatory/so_long.h
 
 all: libft $(NAME)
 
@@ -16,7 +18,7 @@ libft: $(LIBFT)
 $(LIBFT):
 	make -C Libft
 
-$(NAME): $(OBJ) $(LIBFT) $(GNL)
+$(NAME): $(OBJ) $(LIBFT) $(GNL) $(HEADER)
 	$(CC) $(OBJ) $(LIBFT) $(GNL) $(FFLAGS) -o $(NAME)
 
 %.o: %.c

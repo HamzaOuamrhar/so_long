@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:11:33 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/09 16:48:24 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/09 17:13:19 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,14 @@ typedef struct mlx_data
 	int p;
 }	mlx_data;
 
+typedef struct rendering_pos
+{
+	int i;
+	int j;
+	int f;
+	int l;
+}	rendering_pos;
+
 void print_moves_count(mlx_data *data);
 int valide_extension(char *path);
 int check_map(int fd, char *map_path, int *last, mlx_data *data);
@@ -52,5 +60,6 @@ int	check_last_line(size_t len, char *s);
 int	check_chars(mlx_data *data, char *s, int first, size_t len);
 int	multiple_checks(int first, int last, size_t len, char *s);
 int	check_first_line(char *s, size_t *len);
+void	put_images(mlx_data *data, rendering_pos rp);
 
 #endif

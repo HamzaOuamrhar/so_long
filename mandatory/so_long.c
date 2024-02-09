@@ -6,40 +6,30 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:12:31 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/08 21:40:25 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/09 17:14:01 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void rendering(mlx_data *data, int width, int height)
+void	rendering(mlx_data *data, int width, int height)
 {
-	int i = 0;
-	int j = 0;
-	int f = 0;
-	int l = 0;
-	while(i < height)
+	rendering_pos	rp;
+
+	rp.i = 0;
+	rp.f = 0;
+	while (rp.i < height)
 	{
-		j = 0;
-		l = 0;
-		while(j < width)
+		rp.j = 0;
+		rp.l = 0;
+		while (rp.j < width)
 		{
-			mlx_put_image_to_window(data->mlx, data->window, data->back_img, j, i);
-			if (data->map_array[f][l] == '1')
-				mlx_put_image_to_window(data->mlx, data->window, data->wall_img, j, i);
-			else if (data->map_array[f][l] == 'C')
-				mlx_put_image_to_window(data->mlx, data->window, data->col_img, j, i);
-			else if (data->map_array[f][l] == 'P')
-				mlx_put_image_to_window(data->mlx, data->window, data->player_img, j, i);
-			else if (data->map_array[f][l] == 'E')
-				mlx_put_image_to_window(data->mlx, data->window, data->exit_img, j, i);
-			else
-				mlx_put_image_to_window(data->mlx, data->window, data->back_img, j, i);
-			l++;
-			j += 48;
+			put_images(data, rp);
+			rp.l++;
+			rp.j += 48;
 		}
-		f++;
-		i += 48;
+		rp.f++;
+		rp.i += 48;
 	}
 }
 
