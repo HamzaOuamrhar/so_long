@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:12:31 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/09 17:16:40 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/09 18:17:13 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,65 +33,27 @@ void	rendering(mlx_data *data, int width, int height)
 	}
 }
 
-int key_pressed_handler(int key, mlx_data *data)
+void	collecting(mlx_data *data)
 {
-	if (key == 126)
-	{
-		if (data->map_array[data->yp - 1][data->xp] == '1')
-			return (1);
-		print_moves_count(data);
-		mlx_put_image_to_window(data->mlx, data->window, data->player_img, (data->xp * 48), (data->yp * 48 - 48));
-		mlx_put_image_to_window(data->mlx, data->window, data->back_img, (data->xp * 48), (data->yp * 48));
-		if (data->map_array[data->yp][data->xp] == 'E')
-			mlx_put_image_to_window(data->mlx, data->window, data->exit_img, (data->xp * 48), (data->yp * 48));
-		data->yp -= 1;
-	}
-	else if (key == 125)
-	{
-		if (data->map_array[data->yp + 1][data->xp] == '1')
-			return (1);
-		print_moves_count(data);
-		mlx_put_image_to_window(data->mlx, data->window, data->player_img, (data->xp * 48), (data->yp * 48 + 48));
-		mlx_put_image_to_window(data->mlx, data->window, data->back_img, (data->xp * 48), (data->yp * 48));
-		if (data->map_array[data->yp][data->xp] == 'E')
-			mlx_put_image_to_window(data->mlx, data->window, data->exit_img, (data->xp * 48), (data->yp * 48));
-		data->yp += 1;
-	}
-	else if (key == 124)
-	{
-		if (data->map_array[data->yp][data->xp + 1] == '1')
-			return (1);
-		print_moves_count(data);
-		mlx_put_image_to_window(data->mlx, data->window, data->player_img, (data->xp * 48 + 48), (data->yp * 48));
-		mlx_put_image_to_window(data->mlx, data->window, data->back_img, (data->xp * 48), (data->yp * 48));
-		if (data->map_array[data->yp][data->xp] == 'E')
-			mlx_put_image_to_window(data->mlx, data->window, data->exit_img, (data->xp * 48), (data->yp * 48));
-		data->xp += 1;
-	}
-	else if (key == 123)
-	{
-		if (data->map_array[data->yp][data->xp - 1] == '1')
-			return (1);
-		print_moves_count(data);
-		mlx_put_image_to_window(data->mlx, data->window, data->player_img, (data->xp * 48 - 48), (data->yp * 48));
-		mlx_put_image_to_window(data->mlx, data->window, data->back_img, (data->xp * 48), (data->yp * 48));
-		if (data->map_array[data->yp][data->xp] == 'E')
-			mlx_put_image_to_window(data->mlx, data->window, data->exit_img, (data->xp * 48), (data->yp * 48));
-		data->xp -= 1;
-	}
-	else if (key == 53)
+	data->map_array[data->yp][data->xp] = '0';
+	data->collected += 1;
+	mlx_put_image_to_window(data->mlx, data->window, data->back_img,
+		(data->xp * 48), (data->yp * 48));
+	mlx_put_image_to_window(data->mlx, data->window, data->player_img,
+		(data->xp * 48), (data->yp * 48));
+}
+
+int	key_pressed_handler(int key, mlx_data *data)
+{
+	if (!handle_keys(key, data))
+		return (1);
+	if (key == 53)
 	{
 		mlx_destroy_window(data->mlx, data->window);
 		exit(0);
 	}
 	if (data->map_array[data->yp][data->xp] == 'C')
-	{
-		data->map_array[data->yp][data->xp] = '0';
-		data->collected += 1;
-		mlx_put_image_to_window(data->mlx, data->window, data->back_img, (data->xp * 48), (data->yp * 48));
-		mlx_put_image_to_window(data->mlx, data->window, data->player_img, (data->xp * 48), (data->yp * 48));
-		return(1);
-	}
+		return (collecting(data), 1);
 	else if (data->map_array[data->yp][data->xp] == 'E')
 	{
 		if (data->collected == data->collectibles)
