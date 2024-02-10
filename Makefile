@@ -6,7 +6,7 @@
 #    By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/09 17:15:58 by houamrha          #+#    #+#              #
-#    Updated: 2024/02/10 14:47:43 by houamrha         ###   ########.fr        #
+#    Updated: 2024/02/10 15:09:12 by houamrha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,19 +20,16 @@ SRC = ./mandatory/so_long.c ./mandatory/images_check.c ./mandatory/map_check.c .
 OBJ = $(SRC:.c=.o)
 GNLS = ./get_next_line/get_next_line.c ./get_next_line/get_next_line_utils.c
 GNLO = $(GNLS:.c=.o)
+LBS = ./Libft/ft_putchar_fd.c ./Libft/ft_putendl_fd.c ./Libft/ft_putnbr_fd.c ./Libft/putstr_fd.c ./Libft/ft_strlen.c ./Libft/ft_strncmp.c
+LBO = $(LBS:.c=.o)
 HEADER = ./mandatory/so_long.h
 GN_HEADER = ./get_next_line/get_next_line.h
 LF_HEADER = ./Libft/libft.h
 
-all: libft $(NAME)
+all: $(NAME)
 
-libft: $(ARC)
-
-$(LIBFT): $(LF_HEADER)
-	make -C Libft
-
-$(NAME): $(OBJ) $(LIBFT) $(GNLO)
-	$(CC) $(OBJ) $(LIBFT) $(GNL) $(FFLAGS) -o $(NAME)
+$(NAME): $(OBJ) $(LBO) $(GNLO)
+	$(CC) $(OBJ) $(LBO) $(GNLO) $(FFLAGS) -o $(NAME)
 
 ./mandatory/%.o: ./mandatory/%.c $(HEADER) $(GN_HEADER) $(LF_HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -40,17 +37,16 @@ $(NAME): $(OBJ) $(LIBFT) $(GNLO)
 ./get_next_line/%.o: ./get_next_line/%.c $(GN_HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-get_next_line/%.o: get_next_line/%.C
+./Libft/%.o: ./Libft/%.c $(LF_HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean :
 	rm -f $(OBJ)
-	rm -r $(GNL)
-	make -C Libft clean
+	rm -f $(GNLO)
+	rm -f $(LBO)
 
 fclean : clean
 	rm -f $(NAME)
-	make -C Libft fclean
 
 re: fclean all
 
