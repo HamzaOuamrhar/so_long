@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:12:31 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/10 19:02:56 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/10 21:07:56 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int	key_pressed_handler(int key, t_mlx_data *data)
 	if (key == 53)
 	{
 		mlx_destroy_window(data->mlx, data->window);
+		free_images(data);
+		freeing(data);
 		exit(0);
 	}
 	if (data->map_array[data->yp][data->xp] == 'C')
@@ -59,6 +61,8 @@ int	key_pressed_handler(int key, t_mlx_data *data)
 		if (data->collected == data->collectibles)
 		{
 			mlx_destroy_window(data->mlx, data->window);
+			free_images(data);
+			freeing(data);
 			exit(0);
 		}
 		else
