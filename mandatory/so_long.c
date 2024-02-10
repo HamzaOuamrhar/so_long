@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:12:31 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/09 23:12:22 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/10 13:05:23 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	main(int argc, char **argv)
 	if (!validate_path(data, data.xp, data.yp))
 		return (freeing(&data), perror("Path invalid!"), 1);
 	if (!initialize_game(&data))
-		return (freeing(&data), 1);
+		return (1);
 	mlx_hook(data.window, 2, 0, &key_pressed_handler, &data);
 	mlx_hook(data.window, 17, 0, &close_window_handler, &data);
 	mlx_loop(data.mlx);
