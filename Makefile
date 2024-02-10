@@ -6,7 +6,7 @@
 #    By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/09 17:15:58 by houamrha          #+#    #+#              #
-#    Updated: 2024/02/10 15:20:29 by houamrha         ###   ########.fr        #
+#    Updated: 2024/02/10 16:26:36 by houamrha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ $(NAME): $(OBJ) $(LBO) $(GNLO)
 
 ./mandatory/%.o: ./mandatory/%.c $(HEADER) $(GN_HEADER) $(LF_HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
-	
+
 clean :
 	rm -f $(OBJ)
 	rm -f $(GNLO)

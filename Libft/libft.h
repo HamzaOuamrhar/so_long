@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 17:17:45 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/10 15:12:10 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/10 16:22:08 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }	t_list;
+
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);

@@ -6,11 +6,12 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 16:11:51 by houamrha          #+#    #+#             */
-/*   Updated: 2023/11/17 14:03:29 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/10 16:22:28 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
 
 void	ft_putchar_fd(char c, int fd)
 {
