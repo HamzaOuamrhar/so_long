@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:38:47 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/09 22:00:09 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/10 18:15:49 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	free_array(char **array)
 	int	i;
 
 	i = 0;
+	if (!array)
+		return ;
 	while (array[i])
 	{
 		free(array[i]);
