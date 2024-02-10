@@ -6,7 +6,7 @@
 #    By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/09 17:15:58 by houamrha          #+#    #+#              #
-#    Updated: 2024/02/10 13:15:27 by houamrha         ###   ########.fr        #
+#    Updated: 2024/02/10 14:46:32 by houamrha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 FFLAGS = -lmlx -framework OpenGL -framework AppKit
 NAME = so_long
-LIBFT = ./Libft/libft.a
-library = ./mandatory/so_long.h
+ARC = ./Libft/libft.a
 SRC = ./mandatory/so_long.c ./mandatory/images_check.c ./mandatory/map_check.c ./mandatory/so_long_utils.c ./mandatory/check_map_function_utils.c \
 ./mandatory/mlx_utils.c ./mandatory/key_pressed_utils.c ./mandatory/so_long_utils_2.c
 OBJ = $(SRC:.c=.o)
@@ -27,7 +26,7 @@ LF_HEADER = ./Libft/libft.h
 
 all: libft $(NAME)
 
-libft: $(LIBFT)
+libft: $(ARC)
 
 $(LIBFT): $(LF_HEADER)
 	make -C Libft
