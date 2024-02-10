@@ -6,7 +6,7 @@
 #    By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/09 17:15:58 by houamrha          #+#    #+#              #
-#    Updated: 2024/02/10 14:46:32 by houamrha         ###   ########.fr        #
+#    Updated: 2024/02/10 14:47:43 by houamrha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SRC = ./mandatory/so_long.c ./mandatory/images_check.c ./mandatory/map_check.c .
 ./mandatory/mlx_utils.c ./mandatory/key_pressed_utils.c ./mandatory/so_long_utils_2.c
 OBJ = $(SRC:.c=.o)
 GNLS = ./get_next_line/get_next_line.c ./get_next_line/get_next_line_utils.c
-GNL = $(GNLS:.c=.o)
+GNLO = $(GNLS:.c=.o)
 HEADER = ./mandatory/so_long.h
 GN_HEADER = ./get_next_line/get_next_line.h
 LF_HEADER = ./Libft/libft.h
@@ -31,7 +31,7 @@ libft: $(ARC)
 $(LIBFT): $(LF_HEADER)
 	make -C Libft
 
-$(NAME): $(OBJ) $(LIBFT) $(GNL)
+$(NAME): $(OBJ) $(LIBFT) $(GNLO)
 	$(CC) $(OBJ) $(LIBFT) $(GNL) $(FFLAGS) -o $(NAME)
 
 ./mandatory/%.o: ./mandatory/%.c $(HEADER) $(GN_HEADER) $(LF_HEADER)
