@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 11:43:45 by houamrha          #+#    #+#             */
-/*   Updated: 2023/12/08 17:27:04 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/10 15:24:37 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	shift_buffer(char *buffer)
 
 	j = 0;
 	k = -1;
-	i = ft_strlen(buffer);
+	i = ft_strlen_s(buffer);
 	while (k++ < i)
 		if (buffer[k] == '\n')
 			break ;

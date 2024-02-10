@@ -6,7 +6,7 @@
 #    By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/09 17:15:58 by houamrha          #+#    #+#              #
-#    Updated: 2024/02/10 15:09:12 by houamrha         ###   ########.fr        #
+#    Updated: 2024/02/10 15:20:29 by houamrha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,13 +14,12 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 FFLAGS = -lmlx -framework OpenGL -framework AppKit
 NAME = so_long
-ARC = ./Libft/libft.a
 SRC = ./mandatory/so_long.c ./mandatory/images_check.c ./mandatory/map_check.c ./mandatory/so_long_utils.c ./mandatory/check_map_function_utils.c \
 ./mandatory/mlx_utils.c ./mandatory/key_pressed_utils.c ./mandatory/so_long_utils_2.c
 OBJ = $(SRC:.c=.o)
 GNLS = ./get_next_line/get_next_line.c ./get_next_line/get_next_line_utils.c
 GNLO = $(GNLS:.c=.o)
-LBS = ./Libft/ft_putchar_fd.c ./Libft/ft_putendl_fd.c ./Libft/ft_putnbr_fd.c ./Libft/putstr_fd.c ./Libft/ft_strlen.c ./Libft/ft_strncmp.c
+LBS = ./Libft/ft_putchar_fd.c ./Libft/ft_putendl_fd.c ./Libft/ft_putnbr_fd.c ./Libft/ft_putstr_fd.c ./Libft/ft_strlen.c ./Libft/ft_strncmp.c
 LBO = $(LBS:.c=.o)
 HEADER = ./mandatory/so_long.h
 GN_HEADER = ./get_next_line/get_next_line.h
@@ -31,15 +30,16 @@ all: $(NAME)
 $(NAME): $(OBJ) $(LBO) $(GNLO)
 	$(CC) $(OBJ) $(LBO) $(GNLO) $(FFLAGS) -o $(NAME)
 
-./mandatory/%.o: ./mandatory/%.c $(HEADER) $(GN_HEADER) $(LF_HEADER)
+./Libft/%.o: ./Libft/%.c $(LF_HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
+
 
 ./get_next_line/%.o: ./get_next_line/%.c $(GN_HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-./Libft/%.o: ./Libft/%.c $(LF_HEADER)
+./mandatory/%.o: ./mandatory/%.c $(HEADER) $(GN_HEADER) $(LF_HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
-
+	
 clean :
 	rm -f $(OBJ)
 	rm -f $(GNLO)
