@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:11:33 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/10 16:22:45 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/10 19:04:05 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <fcntl.h>
 # include "../get_next_line/get_next_line.h"
 # include "../Libft/libft.h"
-
 
 typedef struct t_mlx_data
 {

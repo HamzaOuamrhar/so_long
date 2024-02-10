@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 11:43:45 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/10 16:21:42 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/10 19:03:21 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static int	search(char *buffer)
 		i++;
 	return (i);
 }
-
 
 static void	shift_buffer(char *buffer)
 {

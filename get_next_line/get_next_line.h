@@ -6,13 +6,12 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 11:45:19 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/10 16:21:21 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/10 19:04:20 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 20

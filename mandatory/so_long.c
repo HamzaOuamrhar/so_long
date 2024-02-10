@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:12:31 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/10 13:05:23 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/10 19:02:56 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ int	initialize_game(t_mlx_data *data)
 	data->window = mlx_new_window(data->mlx,
 			(data->width * 48), (data->height * 48), "so_long");
 	if (!data->window)
-		return (free(data->mlx), freeing(data), perror("Window error"), 0);
+		return (freeing(data), perror("Window error"), 0);
 	if (!open_and_validate_images(data))
-		return (free(data->mlx), freeing(data), perror("Asset error!"), 0);
+		return (freeing(data), perror("Asset error!"), 0);
 	rendering(data, (data->width * 48), (data->height * 48));
 	return (1);
 }
@@ -102,9 +102,9 @@ int	main(int argc, char **argv)
 	if (!validate_path(data, data.xp, data.yp))
 		return (freeing(&data), perror("Path invalid!"), 1);
 	if (!initialize_game(&data))
-		return (1);
+		exit(1);
 	mlx_hook(data.window, 2, 0, &key_pressed_handler, &data);
 	mlx_hook(data.window, 17, 0, &close_window_handler, &data);
 	mlx_loop(data.mlx);
-	return (free_images(&data), free(data.mlx), freeing(&data), 0);
+	return (free_images(&data), freeing(&data), 0);
 }
