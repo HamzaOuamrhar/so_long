@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:12:31 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/10 21:07:56 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/10 21:13:35 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,4 @@ int	main(int argc, char **argv)
 	mlx_hook(data.window, 2, 0, &key_pressed_handler, &data);
 	mlx_hook(data.window, 17, 0, &close_window_handler, &data);
 	mlx_loop(data.mlx);
-	return (free_images(&data), freeing(&data), 0);
 }
