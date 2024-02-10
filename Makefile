@@ -6,7 +6,7 @@
 #    By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/09 17:15:58 by houamrha          #+#    #+#              #
-#    Updated: 2024/02/09 23:30:41 by houamrha         ###   ########.fr        #
+#    Updated: 2024/02/10 13:15:27 by houamrha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ $(LIBFT): $(LF_HEADER)
 $(NAME): $(OBJ) $(LIBFT) $(GNL)
 	$(CC) $(OBJ) $(LIBFT) $(GNL) $(FFLAGS) -o $(NAME)
 
-./mandatory/%.o: ./mandatory/%.c $(HEADER)
+./mandatory/%.o: ./mandatory/%.c $(HEADER) $(GN_HEADER) $(LF_HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 ./get_next_line/%.o: ./get_next_line/%.c $(GN_HEADER)
