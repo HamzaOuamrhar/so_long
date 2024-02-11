@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:38:47 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/11 18:48:09 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/11 20:36:19 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,11 @@ void	print_moves_count(t_mlx_data *data)
 	s = ft_itoa(data->moves);
 	mlx_put_image_to_window(data->mlx, data->window, data->back_img, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->window, data->wall_img, 0, 0);
-	mlx_string_put(data->mlx, data->window, 0, 0, 0xFFFFFF, s);
+	mlx_put_image_to_window(data->mlx, data->window, data->back_img, 48, 0);
+	mlx_put_image_to_window(data->mlx, data->window, data->wall_img, 48, 0);
+	mlx_put_image_to_window(data->mlx, data->window, data->back_img, 96, 0);
+	mlx_put_image_to_window(data->mlx, data->window, data->wall_img, 96, 0);
+	mlx_string_put(data->mlx, data->window, 0, 0, 0xFFFFFF, "Moves:");
+	mlx_string_put(data->mlx, data->window, 60, 0, 0xFFFFFF, s);
 	free(s);
 }

@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:12:31 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/11 20:21:35 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/11 20:44:22 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	rendering(t_mlx_data *data, int width, int height)
 		rp.f++;
 		rp.i += 48;
 	}
+	mlx_string_put(data->mlx, data->window, 0, 0, 0xFFFFFF, "Moves:0");
 }
 
 void	collecting(t_mlx_data *data)
@@ -88,7 +89,7 @@ int	initialize_game(t_mlx_data *data)
 
 int	main(int argc, char **argv)
 {
-	t_mlx_data	data;	
+	t_mlx_data	data;
 	int			last;
 	char		*map_path;
 	int			fd;
