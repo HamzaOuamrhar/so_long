@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:12:31 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/11 20:44:22 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/11 21:19:24 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	initialize_game(t_mlx_data *data)
 			(data->width * 48), (data->height * 48), "so_long");
 	if (!data->window)
 		return (freeing(data), perror("Window error"), 0);
-	if (!open_and_validate_images(data))
+	if (!open_all_images(data))
 		return (freeing(data), perror("Asset error!"), 0);
 	rendering(data, (data->width * 48), (data->height * 48));
 	return (1);

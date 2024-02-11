@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:40:34 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/11 17:13:31 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/11 21:28:13 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,24 @@ void	free_images(t_mlx_data *data)
 		mlx_destroy_image(data->mlx, data->player_l_img);
 }
 
+void	free_more_images(t_mlx_data *data)
+{
+	if (data->enm_l)
+		mlx_destroy_image(data->mlx, data->enm_l);
+	if (data->p1)
+		mlx_destroy_image(data->mlx, data->p1);
+	if (data->p2)
+		mlx_destroy_image(data->mlx, data->p2);
+	if (data->p3)
+		mlx_destroy_image(data->mlx, data->p3);
+	if (data->p1_l)
+		mlx_destroy_image(data->mlx, data->p1_l);
+	if (data->p2_l)
+		mlx_destroy_image(data->mlx, data->p2_l);
+	if (data->p3_l)
+		mlx_destroy_image(data->mlx, data->p3_l);
+}
+
 int	open_and_validate_images(t_mlx_data *data)
 {
 	int	k;
@@ -41,12 +59,50 @@ int	open_and_validate_images(t_mlx_data *data)
 			"./textures/E.xpm", &k, &z);
 	data->player_img = mlx_xpm_file_to_image(data->mlx,
 			"./textures/P.xpm", &k, &z);
+	data->player_l_img = mlx_xpm_file_to_image(data->mlx,
+			"./textures/p_l.xpm", &k, &z);
 	data->wall_img = mlx_xpm_file_to_image(data->mlx,
 			"./textures/1.xpm", &k, &z);
-	data->player_l_img = mlx_xpm_file_to_image(data->mlx,
-			"./textures/P_l.xpm", &k, &z);
+	data->enm = mlx_xpm_file_to_image(data->mlx,
+			"./textures/enm.xpm", &k, &z);
 	if (!data->back_img || !data->col_img || !data->exit_img
 		|| !data->player_img || !data->wall_img)
-		return (free_images(data), 0);
+		return (0);
+	return (1);
+}
+
+int	open_more_images(t_mlx_data *data)
+{
+	int	k;
+	int	z;
+
+	data->enm_l = mlx_xpm_file_to_image(data->mlx,
+			"./textures/enm_l.xpm", &k, &z);
+	data->p1 = mlx_xpm_file_to_image(data->mlx,
+			"./textures/p1.xpm", &k, &z);
+	data->p2 = mlx_xpm_file_to_image(data->mlx,
+			"./textures/p2.xpm", &k, &z);
+	data->p3 = mlx_xpm_file_to_image(data->mlx,
+			"./textures/p3.xpm", &k, &z);
+	data->p1_l = mlx_xpm_file_to_image(data->mlx,
+			"./textures/p1_l.xpm", &k, &z);
+	data->p2_l = mlx_xpm_file_to_image(data->mlx,
+			"./textures/p2_l.xpm", &k, &z);
+	data->p3_l = mlx_xpm_file_to_image(data->mlx,
+			"./textures/p3_l.xpm", &k, &z);
+	if (!data->enm_l || !data->p1 || !data->p2 || !data->p3
+		|| !data->p1_l || !data->p2_l || !data->p3_l)
+		return (0);
+	return (1);
+}
+
+int	open_all_images(t_mlx_data *data)
+{
+	if (!open_and_validate_images(data) || !open_more_images(data))
+	{
+		free_images(data);
+		free_more_images(data);
+		return (0);
+	}
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:11:33 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/11 18:47:19 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/11 21:24:00 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,14 @@ typedef struct t_mlx_data
 	char	**map_array_copy;
 	void	*player_img;
 	void	*player_l_img;
+	void	*enm;
+	void	*enm_l;
+	void	*p1;
+	void	*p1_l;
+	void	*p2;
+	void	*p2_l;
+	void	*p3;
+	void	*p3_l;
 	void	*wall_img;
 	void	*col_img;
 	void	*back_img;
@@ -72,5 +80,6 @@ void	left_key(t_mlx_data *data);
 int		handle_keys(int key, t_mlx_data *data);
 int		arrays(t_mlx_data *data, int fd, int last, char *map_path);
 int		close_window_handler(t_mlx_data *data);
+int		open_all_images(t_mlx_data *data);
 
 #endif
