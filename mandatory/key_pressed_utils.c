@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:47:37 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/09 21:59:21 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/11 16:55:20 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	right_key(t_mlx_data *data)
 void	left_key(t_mlx_data *data)
 {
 	print_moves_count(data);
-	mlx_put_image_to_window(data->mlx, data->window, data->player_img,
+	mlx_put_image_to_window(data->mlx, data->window, data->player_l_img,
 		(data->xp * 48 - 48), (data->yp * 48));
 	mlx_put_image_to_window(data->mlx, data->window, data->back_img,
 		(data->xp * 48), (data->yp * 48));

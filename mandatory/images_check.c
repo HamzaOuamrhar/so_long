@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:40:34 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/10 19:03:55 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/11 16:54:48 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	free_images(t_mlx_data *data)
 		mlx_destroy_image(data->mlx, data->player_img);
 	if (data->wall_img)
 		mlx_destroy_image(data->mlx, data->wall_img);
+	if (data->player_l_img)
+		mlx_destroy_image(data->mlx, data->player_l_img);
 }
 
 int	open_and_validate_images(t_mlx_data *data)
@@ -41,6 +43,8 @@ int	open_and_validate_images(t_mlx_data *data)
 			"./textures/P.xpm", &k, &z);
 	data->wall_img = mlx_xpm_file_to_image(data->mlx,
 			"./textures/1.xpm", &k, &z);
+	data->player_l_img = mlx_xpm_file_to_image(data->mlx,
+			"./textures/P_l.xpm", &k, &z);
 	if (!data->back_img || !data->col_img || !data->exit_img
 		|| !data->player_img || !data->wall_img)
 		return (free_images(data), 0);
