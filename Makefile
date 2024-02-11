@@ -6,7 +6,7 @@
 #    By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/09 17:15:58 by houamrha          #+#    #+#              #
-#    Updated: 2024/02/11 17:10:21 by houamrha         ###   ########.fr        #
+#    Updated: 2024/02/11 18:38:54 by houamrha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRCB = ./bonus/so_long_bonus.c ./bonus/images_check_bonus.c ./bonus/map_check_bo
 OBJB = $(SRCB:.c=.o)
 GNLS = ./get_next_line/get_next_line.c ./get_next_line/get_next_line_utils.c
 GNLO = $(GNLS:.c=.o)
-LBS = ./Libft/ft_putchar_fd.c ./Libft/ft_putendl_fd.c ./Libft/ft_putnbr_fd.c ./Libft/ft_putstr_fd.c ./Libft/ft_strlen.c ./Libft/ft_strncmp.c
+LBS = ./Libft/ft_putchar_fd.c ./Libft/ft_putendl_fd.c ./Libft/ft_putnbr_fd.c ./Libft/ft_putstr_fd.c ./Libft/ft_strlen.c ./Libft/ft_strncmp.c ./Libft/ft_itoa.c ./Libft/ft_strdup.c
 LBO = $(LBS:.c=.o)
 HEADER = ./mandatory/so_long.h
 HEADER_BONUS = ./bonus/so_long_bonus.h

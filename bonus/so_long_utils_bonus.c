@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:38:47 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/11 17:13:02 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/11 18:41:18 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,11 @@ void	freeing(t_mlx_data *data)
 
 void	print_moves_count(t_mlx_data *data)
 {
+	char	*s;
+
 	data->moves += 1;
-	ft_putnbr_fd(data->moves, 1);
-	ft_putchar_fd('\n', 1);
+	s = ft_itoa(data->moves);
+	mlx_put_image_to_window(data->mlx, data->window, data->back_img, 0, 0);
+	mlx_put_image_to_window(data->mlx, data->window, data->wall_img, 0, 0);
+	mlx_string_put(data->mlx, data->window, 0, 0, 0xFFFFFF, s);
 }
