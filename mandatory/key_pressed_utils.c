@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:47:37 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/11 16:55:20 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/11 17:26:42 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,12 @@ int	handle_keys(int key, t_mlx_data *data)
 void	up_key(t_mlx_data *data)
 {
 	print_moves_count(data);
-	mlx_put_image_to_window(data->mlx, data->window, data->player_img,
-		(data->xp * 48), (data->yp * 48 - 48));
+	if (data->dir == 0)
+		mlx_put_image_to_window(data->mlx, data->window, data->player_img,
+			(data->xp * 48), (data->yp * 48 - 48));
+	else
+		mlx_put_image_to_window(data->mlx, data->window, data->player_l_img,
+			(data->xp * 48), (data->yp * 48 - 48));
 	mlx_put_image_to_window(data->mlx, data->window, data->back_img,
 		(data->xp * 48), (data->yp * 48));
 	if (data->map_array[data->yp][data->xp] == 'E')
@@ -57,8 +61,12 @@ void	up_key(t_mlx_data *data)
 void	down_key(t_mlx_data *data)
 {
 	print_moves_count(data);
-	mlx_put_image_to_window(data->mlx, data->window, data->player_img,
-		(data->xp * 48), (data->yp * 48 + 48));
+	if (data->dir == 0)
+		mlx_put_image_to_window(data->mlx, data->window, data->player_img,
+			(data->xp * 48), (data->yp * 48 + 48));
+	else
+		mlx_put_image_to_window(data->mlx, data->window, data->player_l_img,
+			(data->xp * 48), (data->yp * 48 + 48));
 	mlx_put_image_to_window(data->mlx, data->window, data->back_img,
 		(data->xp * 48), (data->yp * 48));
 	if (data->map_array[data->yp][data->xp] == 'E')
@@ -69,6 +77,7 @@ void	down_key(t_mlx_data *data)
 
 void	right_key(t_mlx_data *data)
 {
+	data->dir = 0;
 	print_moves_count(data);
 	mlx_put_image_to_window(data->mlx, data->window, data->player_img,
 		(data->xp * 48 + 48), (data->yp * 48));
@@ -82,6 +91,7 @@ void	right_key(t_mlx_data *data)
 
 void	left_key(t_mlx_data *data)
 {
+	data->dir = 1;
 	print_moves_count(data);
 	mlx_put_image_to_window(data->mlx, data->window, data->player_l_img,
 		(data->xp * 48 - 48), (data->yp * 48));
