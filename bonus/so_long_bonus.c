@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:12:31 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/11 18:50:30 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/11 20:21:35 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	initialize_game(t_mlx_data *data)
 
 int	main(int argc, char **argv)
 {
-	t_mlx_data	data;
+	t_mlx_data	data;	
 	int			last;
 	char		*map_path;
 	int			fd;
