@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:11:33 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/12 16:36:31 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/12 18:55:59 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,8 @@ typedef struct t_mlx_data
 	int		e;
 	int		p;
 	int		dir;
-	long	new_time;
-	long	old_time;
 	int		flag;
+	int		timing;
 }	t_mlx_data;
 
 typedef struct rendering_pos

@@ -6,19 +6,12 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:13:22 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/12 17:20:13 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/12 18:51:18 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
-time_t	get_time()
-{
-	time_t	t;
-
-	t = time(NULL);
-	return (t);
-}
 void	animate_player_r(t_mlx_data *data)
 {
 	if (data->flag == 0)
@@ -45,17 +38,8 @@ void	animate_player_l(t_mlx_data *data)
 
 int	animate_player(t_mlx_data *data)
 {
-	static int	ff;
-
-	data->new_time = get_time();
-	if (!ff)
+	if (data->timing == 1000)
 	{
-		data->old_time = get_time();
-		ff = 1;
-	}
-	if ((data->new_time - data->old_time) == 1)
-	{
-		data->old_time = get_time();
 		if (data->map_array[data->yp][data->xp] != 'E')
 			mlx_put_image_to_window(data->mlx, data->window, data->back_img, data->xp * 48, data->yp * 48);
 		if (data->dir == 0)
@@ -66,6 +50,9 @@ int	animate_player(t_mlx_data *data)
 			data->flag = 0;
 		else
 			data->flag += 1;
+		data->timing = 0;
 	}
+	else
+		data->timing += 1;
 	return (0);
 }
