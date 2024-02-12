@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 18:37:54 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/10 21:09:20 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/12 17:01:48 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,18 @@ int	close_window_handler(t_mlx_data *data)
 	freeing(data);
 	free_images(data);
 	exit(0);
+}
+
+void	initialize_vars(t_mlx_data *data)
+{
+	data->xp = 0;
+	data->yp = 0;
+	data->height = 0;
+	data->width = 0;
+	data->collectibles = 0;
+	data->collected = 0;
+	data->moves = 0;
+	data->e = 0;
+	data->p = 0;
+	data->dir = 0;
 }

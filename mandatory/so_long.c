@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:12:31 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/11 17:27:37 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/12 17:02:22 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ int	main(int argc, char **argv)
 	map_path = argv[1];
 	if (!valide_extension(map_path))
 		return (perror("Invalid file extension!"), 1);
+	initialize_vars(&data);
 	fd = open(map_path, O_RDONLY);
 	if (!check_map(fd, map_path, &last, &data))
 		return (perror("Invalid map"), 1);

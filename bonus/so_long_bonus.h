@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:11:33 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/11 21:24:00 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/12 16:36:31 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <mlx.h>
 # include <stdio.h>
 # include <fcntl.h>
+# include <time.h>
 # include "../get_next_line/get_next_line.h"
 # include "../Libft/libft.h"
 
@@ -49,6 +50,9 @@ typedef struct t_mlx_data
 	int		e;
 	int		p;
 	int		dir;
+	long	new_time;
+	long	old_time;
+	int		flag;
 }	t_mlx_data;
 
 typedef struct rendering_pos
@@ -81,5 +85,7 @@ int		handle_keys(int key, t_mlx_data *data);
 int		arrays(t_mlx_data *data, int fd, int last, char *map_path);
 int		close_window_handler(t_mlx_data *data);
 int		open_all_images(t_mlx_data *data);
+int		animate_player(t_mlx_data *data);
+void	initialize_vars(t_mlx_data *data);
 
 #endif

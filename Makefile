@@ -6,7 +6,7 @@
 #    By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/09 17:15:58 by houamrha          #+#    #+#              #
-#    Updated: 2024/02/11 18:38:54 by houamrha         ###   ########.fr        #
+#    Updated: 2024/02/12 16:13:50 by houamrha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRC = ./mandatory/so_long.c ./mandatory/images_check.c ./mandatory/map_check.c .
 ./mandatory/mlx_utils.c ./mandatory/key_pressed_utils.c ./mandatory/so_long_utils_2.c
 OBJ = $(SRC:.c=.o)
 SRCB = ./bonus/so_long_bonus.c ./bonus/images_check_bonus.c ./bonus/map_check_bonus.c ./bonus/so_long_utils_bonus.c ./bonus/check_map_function_utils_bonus.c \
-./bonus/mlx_utils_bonus.c ./bonus/key_pressed_utils_bonus.c ./bonus/so_long_utils_2_bonus.c
+./bonus/mlx_utils_bonus.c ./bonus/key_pressed_utils_bonus.c ./bonus/so_long_utils_2_bonus.c ./bonus/animate_player.c
 OBJB = $(SRCB:.c=.o)
 GNLS = ./get_next_line/get_next_line.c ./get_next_line/get_next_line_utils.c
 GNLO = $(GNLS:.c=.o)
