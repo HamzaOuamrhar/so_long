@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:13:22 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/12 18:51:18 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/12 22:33:53 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int	animate_player(t_mlx_data *data)
 		else
 			data->flag += 1;
 		data->timing = 0;
+		put_enemy(data);
 	}
 	else
 		data->timing += 1;

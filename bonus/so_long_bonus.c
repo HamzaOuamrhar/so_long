@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:12:31 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/12 16:37:09 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/12 21:36:56 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ int	main(int argc, char **argv)
 		return (close(fd), freeing(&data), perror("Fd or Malloc Error!"), 1);
 	if (!validate_path(data, data.xp, data.yp))
 		return (freeing(&data), perror("Path invalid!"), 1);
+	get_enemy_pos(&data);
 	if (!initialize_game(&data))
 		exit(1);
 	mlx_hook(data.window, 2, 0, &key_pressed_handler, &data);
