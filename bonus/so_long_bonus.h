@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:11:33 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/12 22:28:46 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/13 13:04:04 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,6 @@ typedef struct rendering_pos
 	int	l;
 }	t_rendering_pos;
 
-
-
 void	print_moves_count(t_mlx_data *data);
 int		valide_extension(char *path);
 int		check_map(int fd, char *map_path, int *last, t_mlx_data *data);
@@ -93,5 +91,6 @@ void	initialize_vars(t_mlx_data *data);
 int		animate_player(t_mlx_data *data);
 void	put_enemy(t_mlx_data *data);
 void	get_enemy_pos(t_mlx_data *data);
+void	cleaning(t_mlx_data *data);
 
 #endif
