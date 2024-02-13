@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 19:02:13 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/13 12:58:40 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/13 15:14:51 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,5 @@ void	put_enemy(t_mlx_data *data)
 		else
 			data->e_dir = 0;
 	}
+	data->timing2 = 0;
 }

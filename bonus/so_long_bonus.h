@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:11:33 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/13 13:04:04 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/13 13:32:17 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct t_mlx_data
 	int		dir;
 	int		flag;
 	int		timing;
+	int		timing2;
 	int		ex;
 	int		ey;
 	int		e_dir;

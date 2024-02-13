@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 18:37:54 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/13 13:04:16 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/13 13:33:22 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	initialize_vars(t_mlx_data *data)
 	data->dir = 0;
 	data->flag = 0;
 	data->timing = 0;
+	data->timing2 = 0;
 	data->e_dir = 0;
 }
 
