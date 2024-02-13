@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 19:02:13 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/12 22:33:23 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/13 12:33:33 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	put_enemy(t_mlx_data *data)
 {
 	if (data->e_dir == 0)
 	{
-		if (data->map_array_copy[data->ey][data->ex + 1] != '1')
+		if (data->map_array[data->ey][data->ex + 1] != '1')
 		{
 			mlx_put_image_to_window(data->mlx, data->window, data->enm, (data->ex + 1) * 48, data->ey * 48);
 			mlx_put_image_to_window(data->mlx, data->window, data->back_img, data->ex * 48, data->ey * 48);
@@ -62,7 +62,7 @@ void	put_enemy(t_mlx_data *data)
 	}
 	else
 	{
-		if (data->map_array_copy[data->ey][data->ex - 1] != '1')
+		if (data->map_array[data->ey][data->ex - 1] != '1')
 		{
 			mlx_put_image_to_window(data->mlx, data->window, data->enm_l, (data->ex - 1) * 48, data->ey * 48);
 			mlx_put_image_to_window(data->mlx, data->window, data->back_img, data->ex * 48, data->ey * 48);
