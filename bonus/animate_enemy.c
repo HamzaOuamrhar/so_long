@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 19:02:13 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/13 15:14:51 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/13 15:23:10 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,19 +79,22 @@ void	animate_enemy_l(t_mlx_data *data)
 
 void	put_enemy(t_mlx_data *data)
 {
-	if (data->e_dir == 0)
+	if (data->ex != 0)
 	{
-		if (data->map_array[data->ey][data->ex + 1] != '1')
-			animate_enemy_r(data);
+		if (data->e_dir == 0)
+		{
+			if (data->map_array[data->ey][data->ex + 1] != '1')
+				animate_enemy_r(data);
+			else
+				data->e_dir = 1;
+		}
 		else
-			data->e_dir = 1;
+		{
+			if (data->map_array[data->ey][data->ex - 1] != '1')
+				animate_enemy_l(data);
+			else
+				data->e_dir = 0;
+		}
+		data->timing2 = 0;
 	}
-	else
-	{
-		if (data->map_array[data->ey][data->ex - 1] != '1')
-			animate_enemy_l(data);
-		else
-			data->e_dir = 0;
-	}
-	data->timing2 = 0;
 }
