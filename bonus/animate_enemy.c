@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 19:02:13 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/13 15:23:10 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/13 15:28:09 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 int	valide_position(int i, int j, t_mlx_data *data)
 {
 	if (data->map_array[j][i + 1] == '0' && data->map_array[j][i - 1] == '0'
-		&& (data->map_array[j + 1][i] == '0' || data->map_array[j - 1][i] == 0))
+		&& (data->map_array[j + 1][i] == '0' || data->map_array[j - 1][i] == 0)
+		&& j != data->yp)
 		return (1);
 	return (0);
 }
