@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:13:22 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/12 22:33:53 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/13 12:28:07 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,13 @@ void	animate_player_l(t_mlx_data *data)
 
 int	animate_player(t_mlx_data *data)
 {
+	if (data->ex == data->xp && data->ey == data->yp)
+	{
+		mlx_destroy_window(data->mlx, data->window);
+		freeing(data);
+		free_images(data);
+		exit(1);
+	}
 	if (data->timing == 1000)
 	{
 		if (data->map_array[data->yp][data->xp] != 'E')
