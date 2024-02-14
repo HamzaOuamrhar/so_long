@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 18:37:54 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/13 12:54:21 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/14 15:22:14 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,7 @@ int	arrays(t_mlx_data *data, int fd, int last, char *map_path)
 
 int	close_window_handler(t_mlx_data *data)
 {
-	mlx_destroy_window(data->mlx, data->window);
-	freeing(data);
-	free_images(data);
+	cleaning(data);
 	exit(0);
 }
 
@@ -53,4 +51,11 @@ void	initialize_vars(t_mlx_data *data)
 	data->e = 0;
 	data->p = 0;
 	data->dir = 0;
+}
+
+void	cleaning(t_mlx_data *data)
+{
+	mlx_destroy_window(data->mlx, data->window);
+	freeing(data);
+	free_images(data);
 }
