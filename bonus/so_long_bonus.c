@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:12:31 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/13 12:26:01 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/14 12:54:39 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,12 @@ void	collecting(t_mlx_data *data)
 	data->collected += 1;
 	mlx_put_image_to_window(data->mlx, data->window, data->back_img,
 		(data->xp * 48), (data->yp * 48));
-	mlx_put_image_to_window(data->mlx, data->window, data->player_img,
-		(data->xp * 48), (data->yp * 48));
+	if (data->dir == 0)
+		mlx_put_image_to_window(data->mlx, data->window, data->player_img,
+			(data->xp * 48), (data->yp * 48));
+	else
+		mlx_put_image_to_window(data->mlx, data->window, data->player_l_img,
+			(data->xp * 48), (data->yp * 48));
 }
 
 int	key_pressed_handler(int key, t_mlx_data *data)
