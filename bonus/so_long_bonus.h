@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:11:33 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/13 13:32:17 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/14 13:06:24 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <mlx.h>
 # include <stdio.h>
 # include <fcntl.h>
-# include <time.h>
 # include "../get_next_line/get_next_line.h"
 # include "../Libft/libft.h"
 
