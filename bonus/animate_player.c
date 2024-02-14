@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:13:22 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/13 15:14:44 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/14 15:42:14 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	animate_player(t_mlx_data *data)
 	if (data->ex == data->xp && data->ey == data->yp)
 	{
 		cleaning(data);
+		write(1, "Game Over!", 10);
 		exit(1);
 	}
 	if (data->timing2 == 5000)

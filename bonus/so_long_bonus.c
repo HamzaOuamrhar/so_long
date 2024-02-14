@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:12:31 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/14 15:19:43 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/14 15:41:38 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int	key_pressed_handler(int key, t_mlx_data *data)
 		if (data->collected == data->collectibles)
 		{
 			cleaning(data);
+			write(1, "Congrats!", 10);
 			exit(0);
 		}
 		else
