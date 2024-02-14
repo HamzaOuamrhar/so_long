@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:12:31 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/14 12:54:39 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/14 13:00:34 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,13 @@ int	initialize_game(t_mlx_data *data)
 {
 	data->mlx = mlx_init();
 	if (!data->mlx)
-		return (freeing(data), perror("Mlx pointer error!"), 0);
+		return (freeing(data), perror("Error\nMlx pointer error!"), 0);
 	data->window = mlx_new_window(data->mlx,
 			(data->width * 48), (data->height * 48), "so_long");
 	if (!data->window)
-		return (freeing(data), perror("Window error"), 0);
+		return (freeing(data), perror("Error\nWindow error"), 0);
 	if (!open_all_images(data))
-		return (freeing(data), perror("Asset error!"), 0);
+		return (freeing(data), perror("Error\nAsset error!"), 0);
 	rendering(data, (data->width * 48), (data->height * 48));
 	return (1);
 }
@@ -99,18 +99,18 @@ int	main(int argc, char **argv)
 	int			fd;
 
 	if (argc != 2)
-		return (perror("Incorrect number of arguments!"), 1);
+		return (perror("Error\nIncorrect number of arguments!"), 1);
 	map_path = argv[1];
 	if (!valide_extension(map_path))
-		return (perror("Invalid file extension!"), 1);
+		return (perror("Error\nInvalid file extension!"), 1);
 	initialize_vars(&data);
 	fd = open(map_path, O_RDONLY);
 	if (!check_map(fd, map_path, &last, &data))
-		return (perror("Invalid map"), 1);
+		return (perror("Error\nInvalid map"), 1);
 	if (!arrays(&data, fd, last, map_path))
-		return (close(fd), freeing(&data), perror("Fd or Malloc Error!"), 1);
+		return (close(fd), freeing(&data), perror("Error\nFd or Malloc Error!"), 1);
 	if (!validate_path(data, data.xp, data.yp))
-		return (freeing(&data), perror("Path invalid!"), 1);
+		return (freeing(&data), perror("Error\nPath invalid!"), 1);
 	get_enemy_pos(&data);
 	if (!initialize_game(&data))
 		exit(1);
