@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:12:31 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/14 13:00:34 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/14 13:04:22 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int	main(int argc, char **argv)
 	if (!check_map(fd, map_path, &last, &data))
 		return (perror("Error\nInvalid map"), 1);
 	if (!arrays(&data, fd, last, map_path))
-		return (close(fd), freeing(&data), perror("Error\nFd or Malloc Error!"), 1);
+		return (close(fd), freeing(&data), perror("Error\nFd Error!"), 1);
 	if (!validate_path(data, data.xp, data.yp))
 		return (freeing(&data), perror("Error\nPath invalid!"), 1);
 	get_enemy_pos(&data);
