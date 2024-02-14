@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 21:36:03 by houamrha          #+#    #+#             */
-/*   Updated: 2024/02/10 18:09:44 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/02/14 12:42:18 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ int	valide_extension(char *path)
 
 	p = path;
 	len = ft_strlen(path);
+	if (len < 4)
+		return (0);
 	i = len - 4;
 	p += i;
 	if (ft_strncmp(p, ".ber", 4) != 0)
